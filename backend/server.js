@@ -5,6 +5,8 @@ const PORT = 5000;
 
 // middleware
 app.use(express.json());
+const userRoutes = require('./routes/userRoutes');
+app.use('/api/users', userRoutes);
 
 // ✅ connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/vezeeta_db', {
