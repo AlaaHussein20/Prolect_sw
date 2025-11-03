@@ -21,6 +21,12 @@ app.get('/', (req, res) => {
   res.send('Backend working & connected to MongoDB! 🚀');
 });
 
+const doctorRoutes = require('./routes/doctorRoutes');
+app.use('/api/doctors', doctorRoutes);
+
+const appointmentRoutes = require('./routes/appointmentRoutes');
+app.use('/api/appointments', appointmentRoutes);
+
 // start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
