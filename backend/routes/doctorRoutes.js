@@ -14,6 +14,7 @@ router.post('/add', async (req, res) => {
 });
 
 // 🟢 عرض كل الدكاترة
+//
 router.get('/', async (req, res) => {
   try {
     const doctors = await Doctor.find();
