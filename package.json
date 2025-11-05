@@ -1,0 +1,12 @@
+{
+  "name": "vezeeta-fullstack",
+  "version": "1.0.0",
+  "description": "Vezeeta full-stack project with backend and frontend",
+  "scripts": {
+    "start": "npm run dev-all",
+    "dev-all": "concurrently \"npm run dev --prefix backend\" \"npm start --prefix frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
