@@ -64,9 +64,9 @@ function Register() {
 
   return (
     <div className="register-container">
-      <div className="register-box">
-        <h1>Create Account</h1>
-        <h3>Join our Medical Platform</h3>
+      <div className="register-form">
+        <h2>Create Account</h2>
+        <p className="subtitle">Join our Medical Platform</p>
 
         {error && <div className="error-message">{error}</div>}
         {success && <div className="success-message">{success}</div>}
@@ -143,7 +143,7 @@ function Register() {
           </button>
         </form>
 
-        <div className="additional-options">
+        <div className="register-link">
           <p>
             Already have an account? <a href="/login">Login here</a>
           </p>
