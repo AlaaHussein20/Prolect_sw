@@ -12,6 +12,8 @@ const DoctorDashboard = () => {
   const [editedProfile, setEditedProfile] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const fetchDoctorData = useCallback(async () => {
@@ -67,16 +69,19 @@ const DoctorDashboard = () => {
 
   const handleSaveProfile = async () => {
     try {
+      setErrorMessage('');
       const response = await axios.put(
         `http://localhost:5000/api/doctors/${doctorProfile._id}`,
         editedProfile
       );
       setDoctorProfile(response.data.doctor);
       setIsEditingProfile(false);
-      alert('Profile updated successfully!');
+      setSuccessMessage('Profile updated successfully!');
+      setTimeout(() => setSuccessMessage(''), 3000);
     } catch (err) {
       console.error('Error updating profile:', err);
-      alert(err.response?.data?.message || 'Failed to update profile');
+      setErrorMessage(err.response?.data?.message || 'Failed to update profile');
+      setTimeout(() => setErrorMessage(''), 5000);
     }
   };
 
@@ -84,7 +89,8 @@ const DoctorDashboard = () => {
     const now = new Date();
     return appointments.filter((apt) => {
       const aptDate = new Date(apt.date);
-      return aptDate >= now || apt.status === 'scheduled';
+      return (aptDate >= now && apt.status === 'scheduled') || 
+             (aptDate >= now && apt.status !== 'completed' && apt.status !== 'canceled');
     });
   };
 
@@ -92,7 +98,7 @@ const DoctorDashboard = () => {
     const now = new Date();
     return appointments.filter((apt) => {
       const aptDate = new Date(apt.date);
-      return aptDate < now || apt.status === 'completed';
+      return aptDate < now || apt.status === 'completed' || apt.status === 'canceled';
     });
   };
 
@@ -138,6 +144,14 @@ const DoctorDashboard = () => {
           Logout
         </button>
       </div>
+
+      {/* Success and Error Messages */}
+      {successMessage && (
+        <div className="success-message">{successMessage}</div>
+      )}
+      {errorMessage && (
+        <div className="error-message">{errorMessage}</div>
+      )}
 
       {/* Profile Section */}
       <div className="profile-section">
