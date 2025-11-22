@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Dashboard.css';
@@ -14,11 +14,7 @@ const DoctorDashboard = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchDoctorData();
-  }, []);
-
-  const fetchDoctorData = async () => {
+  const fetchDoctorData = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -41,7 +37,11 @@ const DoctorDashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user.id]);
+
+  useEffect(() => {
+    fetchDoctorData();
+  }, [fetchDoctorData]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
