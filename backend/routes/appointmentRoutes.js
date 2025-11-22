@@ -25,4 +25,18 @@ router.get('/', async (req, res) => {
   }
 });
 
+// 🟢 Get appointments for a specific doctor
+router.get('/doctor/:doctorId', async (req, res) => {
+  try {
+    const { doctorId } = req.params;
+    const appointments = await Appointment.find({ doctor: doctorId })
+      .populate('patient', 'name email role')
+      .populate('doctor', 'name specialization fees')
+      .sort({ date: 1, time: 1 });
+    res.json(appointments);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
