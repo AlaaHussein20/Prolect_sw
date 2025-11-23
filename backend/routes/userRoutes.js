@@ -10,7 +10,7 @@ const JWT_SECRET = 'your-secret-key'; // In production, use environment variable
 // ✅ Route to create a new user
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role, specialization, phone, fees } = req.body;
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -21,7 +21,27 @@ router.post('/register', async (req, res) => {
     const user = new User({ name, email, password, role });
     await user.save();
 
-    res.status(201).json({ message: 'User created successfully!', user });
+    // If registering as a doctor, create a doctor profile
+    let doctorProfile = null;
+    if (role === 'doctor') {
+      const Doctor = require('../models/Doctor');
+      doctorProfile = new Doctor({
+        userId: user._id,
+        name,
+        email,
+        specialization: specialization || 'General',
+        phone: phone || '',
+        fees: fees || 0,
+        availableSlots: []
+      });
+      await doctorProfile.save();
+    }
+
+    res.status(201).json({
+      message: 'User created successfully!',
+      user,
+      doctorProfile
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
