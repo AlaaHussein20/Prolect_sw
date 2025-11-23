@@ -10,6 +10,8 @@ function Register() {
     password: '',
     confirmPassword: '',
     role: 'patient',
+    specialization: '',
+    fees: ''
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -37,15 +39,20 @@ function Register() {
 
     try {
       // Register user
+      const registerPayload = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        role: formData.role
+      };
+      if (formData.role === 'doctor') {
+        registerPayload.specialization = formData.specialization;
+        registerPayload.fees = formData.fees;
+      }
       const res = await fetch('http://localhost:5000/api/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-          role: formData.role
-        }),
+        body: JSON.stringify(registerPayload),
       });
 
       const data = await res.json();
@@ -53,30 +60,11 @@ function Register() {
         throw new Error(data.message || 'Registration failed');
       }
 
-      // If doctor, create doctor profile
-      if (formData.role === 'doctor') {
-        try {
-          const doctorProfile = {
-            userId: data.user._id || data.user.id,
-            name: formData.name,
-            email: formData.email,
-            specialization: '',
-            phone: '',
-            fees: 0
-          };
-          const doctorRes = await fetch('http://localhost:5000/api/doctors/add', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(doctorProfile)
-          });
-          const doctorData = await doctorRes.json();
-          if (!doctorRes.ok) {
-            throw new Error(doctorData.message || 'Doctor profile creation failed');
-          }
-        } catch (err) {
-          setError('User registered, but failed to create doctor profile: ' + (err.message || 'Unknown error'));
-          return;
-        }
+
+      // If doctor, check if doctorProfile was created
+      if (formData.role === 'doctor' && !data.doctorProfile) {
+        setError('User registered, but failed to create doctor profile.');
+        return;
       }
 
       setSuccess('Registration successful! Redirecting to login...');
@@ -163,6 +151,35 @@ function Register() {
               <option value="doctor">Doctor</option>
             </select>
           </div>
+
+          {formData.role === 'doctor' && (
+            <>
+              <div className="form-group">
+                <label htmlFor="specialization">Specialization</label>
+                <input
+                  type="text"
+                  id="specialization"
+                  name="specialization"
+                  value={formData.specialization}
+                  onChange={handleChange}
+                  placeholder="e.g. Cardiology"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="fees">Consultation Fees</label>
+                <input
+                  type="number"
+                  id="fees"
+                  name="fees"
+                  value={formData.fees}
+                  onChange={handleChange}
+                  placeholder="e.g. 100"
+                  required
+                />
+              </div>
+            </>
+          )}
 
           <button type="submit" className="register-button">
             Create Account
