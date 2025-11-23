@@ -36,6 +36,7 @@ function Register() {
     }
 
     try {
+      // Register user
       const res = await fetch('http://localhost:5000/api/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -48,9 +49,34 @@ function Register() {
       });
 
       const data = await res.json();
-      
       if (!res.ok) {
         throw new Error(data.message || 'Registration failed');
+      }
+
+      // If doctor, create doctor profile
+      if (formData.role === 'doctor') {
+        try {
+          const doctorProfile = {
+            userId: data.user._id || data.user.id,
+            name: formData.name,
+            email: formData.email,
+            specialization: '',
+            phone: '',
+            fees: 0
+          };
+          const doctorRes = await fetch('http://localhost:5000/api/doctors/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(doctorProfile)
+          });
+          const doctorData = await doctorRes.json();
+          if (!doctorRes.ok) {
+            throw new Error(doctorData.message || 'Doctor profile creation failed');
+          }
+        } catch (err) {
+          setError('User registered, but failed to create doctor profile: ' + (err.message || 'Unknown error'));
+          return;
+        }
       }
 
       setSuccess('Registration successful! Redirecting to login...');
