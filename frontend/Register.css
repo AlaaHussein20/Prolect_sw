@@ -3,11 +3,11 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #1a1a1a;
+    background: linear-gradient(135deg, #1a0414 0%, #2b0720 50%, #40062a 100%);
 }
 
 .register-form {
-    background-color: #2d2d2d;
+    background-color: rgba(40, 20, 30, 0.95);
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
@@ -16,7 +16,7 @@
 }
 
 .register-form h2 {
-    color: #ffffff;
+    color: #ff77b5;
     text-align: center;
     margin-bottom: 1.5rem;
     font-size: 2rem;
@@ -29,29 +29,29 @@
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #ffffff;
+    color: #f0e8ef;
 }
 
 .form-group input {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #404040;
+    border: 1px solid #4a2a36;
     border-radius: 5px;
-    background-color: #333333;
-    color: #ffffff;
+    background-color: rgba(30, 18, 24, 0.9);
+    color: #f6eefa;
     font-size: 1rem;
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: #0066cc;
-    box-shadow: 0 0 5px rgba(0, 102, 204, 0.5);
+    border-color: #ff77b5;
+    box-shadow: 0 0 8px rgba(255, 119, 181, 0.12);
 }
 
 .register-button {
     width: 100%;
     padding: 0.75rem;
-    background-color: #0066cc;
+    background: linear-gradient(135deg, #ff9ccf 0%, #ff3d8a 100%);
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -61,17 +61,17 @@
 }
 
 .register-button:hover {
-    background-color: #0052a3;
+    background: linear-gradient(135deg, #ff7ab8 0%, #ff2f72 100%);
 }
 
 .register-link {
     text-align: center;
     margin-top: 1rem;
-    color: #999999;
+    color: #d9b7c9;
 }
 
 .register-link a {
-    color: #0066cc;
+    color: #ff77b5;
     text-decoration: none;
     margin-left: 0.5rem;
 }
@@ -81,7 +81,7 @@
 }
 
 .error-message {
-    color: #ff4444;
+    color: #ff6b81;
     margin-top: 0.5rem;
     font-size: 0.875rem;
 }
