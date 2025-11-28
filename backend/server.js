@@ -11,12 +11,12 @@ app.use(express.json());
 const userRoutes = require('./routes/userRoutes');
 app.use('/api/users', userRoutes);
 
-// ✅ connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/vezeeta_db', {
+// ✅ connect to MongoDB Atlas
+mongoose.connect('mongodb+srv://alaahussein20_db_user:projectsoftware@project.sz8j3z2.mongodb.net/vezeeta_db', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log('✅ Connected to MongoDB'))
+.then(() => console.log('✅ Connected to MongoDB Atlas'))
 .catch((err) => console.error('❌ MongoDB connection error:', err));
 
 // test route
