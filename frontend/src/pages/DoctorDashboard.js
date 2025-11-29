@@ -14,6 +14,10 @@ const DoctorDashboard = () => {
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('doctorDarkMode');
+    return saved ? JSON.parse(saved) : false;
+  });
   const navigate = useNavigate();
 
   const fetchDoctorData = useCallback(async () => {
@@ -44,6 +48,12 @@ const DoctorDashboard = () => {
   useEffect(() => {
     fetchDoctorData();
   }, [fetchDoctorData]);
+
+  const handleToggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    localStorage.setItem('doctorDarkMode', JSON.stringify(newDarkMode));
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -133,16 +143,21 @@ const DoctorDashboard = () => {
   const pastAppointments = getPastAppointments();
 
   return (
-    <div className="dashboard-container">
+    <div className={`dashboard-container ${darkMode ? 'dark-mode' : ''}`}>
       {/* Header */}
       <div className="dashboard-header">
         <div>
           <h1>Doctor Dashboard</h1>
           <p className="welcome-text">Welcome back, Dr. {user?.name}!</p>
         </div>
-        <button onClick={handleLogout} className="logout-button">
-          Logout
-        </button>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <button onClick={handleToggleDarkMode} className="dark-mode-toggle">
+            {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+          </button>
+          <button onClick={handleLogout} className="logout-button">
+            Logout
+          </button>
+        </div>
       </div>
 
       {/* Success and Error Messages */}
