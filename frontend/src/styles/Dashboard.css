@@ -372,6 +372,163 @@
   }
 }
 
+/* Dark Mode Styles */
+.dashboard-container.dark-mode {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.dark-mode .dashboard-container h1 {
+  color: #4a9eff;
+}
+
+.dark-mode .dashboard-container h2 {
+  color: #e0e0e0;
+}
+
+.dark-mode .dashboard-container p {
+  color: #b0b0b0;
+}
+
+.dark-mode .dashboard-header {
+  border-bottom-color: #333;
+  background-color: #262626;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.dark-mode .welcome-text {
+  color: #a0a0a0;
+}
+
+.dark-mode .profile-section,
+.dark-mode .appointments-section {
+  background-color: #262626;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .profile-label,
+.dark-mode .section-header h2 {
+  color: #e0e0e0;
+}
+
+.dark-mode .profile-value {
+  color: #b0b0b0;
+}
+
+.dark-mode .profile-item {
+  border-bottom-color: #333;
+}
+
+.dark-mode .profile-edit-form {
+  background-color: #1e1e1e;
+}
+
+.dark-mode .form-group label {
+  color: #e0e0e0;
+}
+
+.dark-mode .form-group input {
+  background-color: #333;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+.dark-mode .form-group input:focus {
+  border-color: #4a9eff;
+  box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.2);
+}
+
+.dark-mode .tabs {
+  border-bottom-color: #333;
+}
+
+.dark-mode .tab {
+  color: #a0a0a0;
+}
+
+.dark-mode .tab:hover {
+  color: #4a9eff;
+}
+
+.dark-mode .tab.active {
+  color: #4a9eff;
+  border-bottom-color: #4a9eff;
+}
+
+.dark-mode .appointment-card {
+  background-color: #333;
+  border-left-color: #4a9eff;
+}
+
+.dark-mode .appointment-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .appointment-card.past {
+  border-left-color: #808080;
+}
+
+.dark-mode .appointment-date,
+.dark-mode .appointment-body h3 {
+  color: #e0e0e0;
+}
+
+.dark-mode .appointment-time {
+  background-color: #1e1e1e;
+  color: #b0b0b0;
+}
+
+.dark-mode .patient-info p {
+  color: #b0b0b0;
+}
+
+.dark-mode .patient-info strong {
+  color: #e0e0e0;
+}
+
+.dark-mode .no-appointments {
+  color: #666;
+}
+
+.dark-mode .error-banner {
+  background-color: #4a2a2a;
+  color: #ff6b6b;
+  border-color: #663333;
+}
+
+.dark-mode .success-message {
+  background-color: #2a4a2a;
+  color: #6bff6b;
+  border-color: #336633;
+}
+
+.dark-mode .error-message {
+  background-color: #4a2a2a;
+  color: #ff6b6b;
+  border-color: #663333;
+}
+
+.dark-mode-toggle {
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dark-mode-toggle:hover {
+  background-color: #444;
+  border-color: #555;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .dashboard-container {
@@ -408,6 +565,19 @@
   .tab.active {
     border-left-color: #0070cd;
     border-bottom-color: transparent;
+  }
+
+  .dark-mode .tab.active {
+    border-left-color: #4a9eff;
+  }
+
+  .dark-mode .dashboard-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .dark-mode .dark-mode-toggle {
+    width: 100%;
   }
 
   .appointment-header {
