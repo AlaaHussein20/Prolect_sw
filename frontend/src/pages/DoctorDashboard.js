@@ -49,10 +49,36 @@ const DoctorDashboard = () => {
     fetchDoctorData();
   }, [fetchDoctorData]);
 
+  useEffect(() => {
+    // Apply dark mode to body and html on mount
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+      document.documentElement.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+      document.documentElement.classList.remove('dark-mode');
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove('dark-mode');
+      document.documentElement.classList.remove('dark-mode');
+    };
+  }, [darkMode]);
+
   const handleToggleDarkMode = () => {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
     localStorage.setItem('doctorDarkMode', JSON.stringify(newDarkMode));
+    
+    // Apply dark mode to body and html
+    if (newDarkMode) {
+      document.body.classList.add('dark-mode');
+      document.documentElement.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+      document.documentElement.classList.remove('dark-mode');
+    }
   };
 
   const handleLogout = () => {
@@ -144,6 +170,15 @@ const DoctorDashboard = () => {
 
   return (
     <div className={`dashboard-container ${darkMode ? 'dark-mode' : ''}`}>
+      {/* Dark Mode Logo - Fixed Position */}
+      <div 
+        className="dark-mode-logo" 
+        onClick={handleToggleDarkMode}
+        title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      >
+        {darkMode ? '🌙' : '☀️'}
+      </div>
+
       {/* Header */}
       <div className="dashboard-header">
         <div>
@@ -151,9 +186,6 @@ const DoctorDashboard = () => {
           <p className="welcome-text">Welcome back, Dr. {user?.name}!</p>
         </div>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-          <button onClick={handleToggleDarkMode} className="dark-mode-toggle">
-            {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
-          </button>
           <button onClick={handleLogout} className="logout-button">
             Logout
           </button>
