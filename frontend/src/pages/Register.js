@@ -78,6 +78,9 @@ function Register() {
 
   return (
     <div className="register-container">
+      {/* Top-left brand logo */}
+      <img src="/logo.svg" alt="Vezeeta Logo" className="register-page-logo" />
+      
       <div className="register-form">
         <h2>Create Account</h2>
         <p className="subtitle">Join our Medical Platform</p>

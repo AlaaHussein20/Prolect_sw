@@ -1,4 +1,14 @@
-﻿.register-container {
+﻿/* Ensure the entire page uses the same background and no white gaps */
+html, body, #root {
+  height: 100%;
+}
+
+html, body {
+  margin: 0;
+  background: linear-gradient(135deg, #1a0414 0%, #2b0720 50%, #40062a 100%);
+}
+
+.register-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,6 +17,23 @@
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #e1e1e1;
+  position: relative;
+}
+
+/* Top-left logo on Register page */
+.register-page-logo {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  width: 140px;
+  height: auto;
+  z-index: 10;
+  opacity: 0.95;
+  transition: opacity 0.3s ease;
+}
+
+.register-page-logo:hover {
+  opacity: 1;
 }
 
 .register-form {
