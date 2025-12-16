@@ -155,16 +155,27 @@ function Register() {
           {formData.role === 'doctor' && (
             <>
               <div className="form-group">
-                <label htmlFor="specialization">Specialization</label>
-                <input
-                  type="text"
+                <label htmlFor="specialization">Specialization / التخصص</label>
+                <select
                   id="specialization"
                   name="specialization"
                   value={formData.specialization}
                   onChange={handleChange}
-                  placeholder="e.g. Cardiology"
                   required
-                />
+                >
+                  <option value="">Select specialization / اختر التخصص</option>
+                  <option value="Dentistry">Dentistry - طب الأسنان</option>
+                  <option value="Cardiology">Cardiology - أمراض القلب</option>
+                  <option value="Dermatology">Dermatology - الجلدية</option>
+                  <option value="Neurology">Neurology - الأعصاب</option>
+                  <option value="Pediatrics">Pediatrics - الأطفال</option>
+                  <option value="Orthopedics">Orthopedics - العظام</option>
+                  <option value="Psychiatry">Psychiatry - الطب النفسي</option>
+                  <option value="Gynecology">Gynecology - النساء والتوليد</option>
+                  <option value="Ophthalmology">Ophthalmology - العيون</option>
+                  <option value="ENT">ENT - الأنف والأذن والحنجرة</option>
+                  <option value="General Medicine">General Medicine - باطنة عامة</option>
+                </select>
               </div>
               <div className="form-group">
                 <label htmlFor="fees">Consultation Fees</label>
