@@ -499,6 +499,23 @@ const PatientDashboard = () => {
           >
             Logout
           </button>
+          <button
+            onClick={() => navigate('/appointment-history')}
+            style={{
+              background: theme.profileBg,
+              border: theme.profileBorder,
+              color: theme.profileText,
+              padding: '10px 14px',
+              borderRadius: 12,
+              fontWeight: 600,
+              cursor: 'pointer',
+              fontSize: 14,
+              transition: 'all 0.2s',
+            }}
+            title="View Appointment History"
+          >
+            📜 History
+          </button>
         </div>
       </header>
 
