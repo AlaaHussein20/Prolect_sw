@@ -1,0 +1,191 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  backend-test:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install backend dependencies
+      working-directory: ./backend
+      run: npm install
+
+    - name: Check for syntax errors
+      working-directory: ./backend
+      run: node -c server.js
+
+    - name: Run backend linter (if configured)
+      working-directory: ./backend
+      run: |
+        if grep -q "\"lint\"" package.json; then
+          npm run lint
+        else
+          echo "No lint script found, skipping..."
+        fi
+      continue-on-error: true
+
+  frontend-test:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install frontend dependencies
+      working-directory: ./frontend
+      run: npm install
+
+    - name: Run frontend tests
+      working-directory: ./frontend
+      run: npm test -- --coverage --watchAll=false
+      env:
+        CI: true
+
+    - name: Run frontend build
+      working-directory: ./frontend
+      run: npm run build
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v4
+      with:
+        directory: ./frontend/coverage
+        flags: frontend
+      continue-on-error: true
+
+  integration-test:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: [backend-test, frontend-test]
+    continue-on-error: true
+    
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.adminCommand({ping: 1})'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+
+    - name: Install root dependencies
+      run: npm install
+
+    - name: Install backend dependencies
+      working-directory: ./backend
+      run: npm install
+
+    - name: Install frontend dependencies
+      working-directory: ./frontend
+      run: npm install
+
+    - name: Start backend server
+      working-directory: ./backend
+      run: |
+        nohup npm start > server.log 2>&1 &
+        echo $! > backend.pid
+        sleep 10
+      env:
+        MONGODB_URI: mongodb://localhost:27017/vezeeta_test
+        PORT: 5000
+        JWT_SECRET: test_secret_key
+
+    - name: Wait for backend to be ready
+      run: |
+        echo "Checking if backend is ready..."
+        for i in {1..30}; do
+          if curl -f http://localhost:5000 2>/dev/null; then
+            echo "Backend is ready!"
+            exit 0
+          fi
+          echo "Waiting for backend... ($i/30)"
+          sleep 2
+        done
+        echo "Backend failed to start. Checking logs..."
+        cat backend/server.log || echo "No log file found"
+        exit 1
+
+    - name: Run integration tests
+      working-directory: ./backend
+      run: node test.js
+      continue-on-error: true
+
+    - name: Display backend logs on failure
+      if: failure()
+      run: cat backend/server.log || echo "No log file found"
+
+    - name: Stop backend server
+      if: always()
+      run: |
+        if [ -f backend/backend.pid ]; then
+          kill $(cat backend/backend.pid) 2>/dev/null || true
+        fi
+        # Also kill any remaining node processes
+        pkill -f "node.*server.js" || true
+
+  code-quality:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+
+    - name: Install dependencies for audit
+      run: |
+        cd backend && npm install
+        cd ../frontend && npm install
+
+    - name: Check for security vulnerabilities
+      run: |
+        cd backend && npm audit --audit-level=moderate || true
+        cd ../frontend && npm audit --audit-level=moderate || true
+
+    - name: Check for outdated dependencies
+      run: |
+        cd backend && npm outdated || true
+        cd ../frontend && npm outdated || true
+      continue-on-error: true

@@ -10,3 +10,11 @@
 # General
 node_modules
 build
+
+# Test coverage
+coverage
+*.lcov
+.nyc_output
+
+# CI/CD
+.github/workflows/*.log

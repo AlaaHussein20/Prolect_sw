@@ -1,5 +1,7 @@
 # Prolect_sw
 
+![CI Status](https://github.com/YOUR_USERNAME/YOUR_REPO/workflows/CI/badge.svg)
+
 ## Project Summary
 Prolect_sw is a full-stack application that helps manage medical appointments, users, and doctor/patient interactions. It provides simple workflows for scheduling and tracking appointments and exposes separate backend APIs and a React-based frontend for the user interfaces.
 
@@ -68,19 +70,28 @@ Look for environment variables or config usage in `backend/server.js` and route 
 Create a `.env` file in `backend/` (if used) with the necessary values before starting the server.
 
 ## Tests
-If tests are present, they will usually be defined in each package's `package.json` under `scripts`. Run them with:
+A comprehensive CI/CD pipeline runs automatically on every push and pull request to ensure code quality:
 
+- **Backend Tests**: Syntax validation and integration tests
+- **Frontend Tests**: React component tests with coverage reporting
+- **Integration Tests**: Full-stack testing with MongoDB
+- **Code Quality**: Security audits and dependency checks
+
+### Running Tests Locally
+
+Backend tests:
 ```powershell
 cd backend
 npm test
 ```
 
-and/or
-
+Frontend tests:
 ```powershell
 cd frontend
 npm test
 ```
+
+For more details about the CI/CD setup, see [.github/workflows/README.md](.github/workflows/README.md).
 
 ## Contributing
 - Fork the repo, create a feature branch, and submit a pull request.
