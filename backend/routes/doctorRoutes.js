@@ -53,16 +53,45 @@ router.get('/:id', async (req, res) => {
 // 🟢 Update doctor profile
 router.put('/:id', async (req, res) => {
   try {
-    const { name, specialization, email, phone, fees } = req.body;
+    const { name, specialization, email, phone, fees, availableSlots } = req.body;
+    const update = { name, specialization, email, phone, fees };
+    if (Array.isArray(availableSlots)) {
+      update.availableSlots = availableSlots;
+    }
+
     const doctor = await Doctor.findByIdAndUpdate(
       req.params.id,
-      { name, specialization, email, phone, fees },
+      update,
       { new: true, runValidators: true }
     );
     if (!doctor) {
       return res.status(404).json({ message: 'Doctor not found' });
     }
     res.json({ message: 'Doctor profile updated successfully', doctor });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 🟢 Update doctor availability slots
+router.put('/:id/slots', async (req, res) => {
+  try {
+    const { availableSlots } = req.body;
+    if (!Array.isArray(availableSlots)) {
+      return res.status(400).json({ message: 'availableSlots must be an array' });
+    }
+
+    const doctor = await Doctor.findByIdAndUpdate(
+      req.params.id,
+      { availableSlots },
+      { new: true, runValidators: true }
+    );
+
+    if (!doctor) {
+      return res.status(404).json({ message: 'Doctor not found' });
+    }
+
+    res.json({ message: 'Availability updated successfully', doctor });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

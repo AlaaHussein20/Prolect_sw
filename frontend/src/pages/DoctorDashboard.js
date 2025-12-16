@@ -14,6 +14,9 @@ const DoctorDashboard = () => {
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [availableSlots, setAvailableSlots] = useState([]);
+  const [slotDate, setSlotDate] = useState('');
+  const [slotTime, setSlotTime] = useState('');
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('doctorDarkMode');
     return saved ? JSON.parse(saved) : false;
@@ -31,6 +34,7 @@ const DoctorDashboard = () => {
       );
       setDoctorProfile(profileResponse.data);
       setEditedProfile(profileResponse.data);
+      setAvailableSlots(profileResponse.data.availableSlots || []);
 
       // Fetch appointments for this doctor
       const appointmentsResponse = await axios.get(
@@ -101,6 +105,60 @@ const DoctorDashboard = () => {
       ...editedProfile,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const formatSlotLabel = (slot) => {
+    if (!slot) return '';
+    if (typeof slot === 'string') return slot;
+    const dateLabel = slot.date
+      ? new Date(slot.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
+      : 'Any day';
+    const timeLabel = slot.time || 'Any time';
+    return `${dateLabel} • ${timeLabel}`;
+  };
+
+  const handleAddSlot = () => {
+    if (!slotDate || !slotTime) {
+      setErrorMessage('Please choose both day and time');
+      setTimeout(() => setErrorMessage(''), 3000);
+      return;
+    }
+
+    const newSlot = { date: slotDate, time: slotTime };
+    const exists = availableSlots.some(
+      (s) => s.date === newSlot.date && s.time === newSlot.time
+    );
+    if (exists) {
+      setErrorMessage('Slot already added');
+      setTimeout(() => setErrorMessage(''), 3000);
+      return;
+    }
+
+    setAvailableSlots((prev) => [...prev, newSlot]);
+    setSlotDate('');
+    setSlotTime('');
+  };
+
+  const handleRemoveSlot = (index) => {
+    setAvailableSlots((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleSaveSlots = async () => {
+    try {
+      setErrorMessage('');
+      const response = await axios.put(
+        `http://localhost:5001/api/doctors/${doctorProfile._id}/slots`,
+        { availableSlots }
+      );
+      setDoctorProfile(response.data.doctor);
+      setAvailableSlots(response.data.doctor.availableSlots || []);
+      setSuccessMessage('Availability updated successfully');
+      setTimeout(() => setSuccessMessage(''), 3000);
+    } catch (err) {
+      console.error('Error saving slots:', err);
+      setErrorMessage(err.response?.data?.message || 'Failed to save availability');
+      setTimeout(() => setErrorMessage(''), 4000);
+    }
   };
 
   const handleSaveProfile = async () => {
@@ -300,6 +358,58 @@ const DoctorDashboard = () => {
             )}
           </div>
         )}
+      </div>
+
+      {/* Availability Section */}
+      <div className="appointments-section" style={{ marginTop: '20px' }}>
+        <h2>Availability</h2>
+        <p className="subtitle">Add your free days and time slots so patients can book easily.</p>
+        <div className="form-row" style={{ gap: '12px', alignItems: 'flex-end' }}>
+          <div className="form-group" style={{ flex: 1 }}>
+            <label>Day</label>
+            <input
+              type="date"
+              value={slotDate}
+              onChange={(e) => setSlotDate(e.target.value)}
+            />
+          </div>
+          <div className="form-group" style={{ flex: 1 }}>
+            <label>Time</label>
+            <input
+              type="time"
+              value={slotTime}
+              onChange={(e) => setSlotTime(e.target.value)}
+            />
+          </div>
+          <button onClick={handleAddSlot} className="save-button" style={{ height: '48px', alignSelf: 'center' }}>
+            + Add Slot
+          </button>
+        </div>
+
+        <div className="appointments-list" style={{ marginTop: '12px' }}>
+          {availableSlots.length === 0 ? (
+            <p className="no-appointments">No slots added yet</p>
+          ) : (
+            availableSlots.map((slot, idx) => (
+              <div key={`${slot.date}-${slot.time}-${idx}`} className="appointment-card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                  <div className="appointment-header" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <span className="appointment-date">{formatSlotLabel(slot)}</span>
+                  </div>
+                </div>
+                <button className="cancel-button" onClick={() => handleRemoveSlot(idx)}>
+                  Remove
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+
+        <div className="form-actions" style={{ justifyContent: 'flex-end' }}>
+          <button onClick={handleSaveSlots} className="save-button">
+            Save Availability
+          </button>
+        </div>
       </div>
 
       {/* Appointments Section */}

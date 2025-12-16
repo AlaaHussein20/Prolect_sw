@@ -7,7 +7,12 @@ router.post('/book', async (req, res) => {
   try {
     const appointment = new Appointment(req.body);
     await appointment.save();
-    res.status(201).json({ message: 'Appointment booked!', appointment });
+
+    const populated = await Appointment.findById(appointment._id)
+      .populate('patient', 'name email role')
+      .populate('doctor', 'name specialization fees');
+
+    res.status(201).json({ message: 'Appointment booked!', appointment: populated });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -34,6 +39,28 @@ router.get('/doctor/:doctorId', async (req, res) => {
       .populate('doctor', 'name specialization fees')
       .sort({ date: 1, time: 1 });
     res.json(appointments);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 🟠 Cancel appointment
+router.patch('/:id/cancel', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updated = await Appointment.findByIdAndUpdate(
+      id,
+      { status: 'canceled' },
+      { new: true }
+    )
+      .populate('patient', 'name email role')
+      .populate('doctor', 'name specialization fees');
+
+    if (!updated) {
+      return res.status(404).json({ error: 'Appointment not found' });
+    }
+
+    res.json({ message: 'Appointment canceled', appointment: updated });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
