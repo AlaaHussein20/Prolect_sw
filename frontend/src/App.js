@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import PatientDashboard from './pages/PatientDashboard';
 import DoctorDashboard from './pages/DoctorDashboard';
+import AppointmentHistory from './pages/AppointmentHistory';
 
 // Protected Route component
 const ProtectedRoute = ({ children }) => {
@@ -30,6 +31,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <PatientDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/appointment-history"
+            element={
+              <ProtectedRoute>
+                <AppointmentHistory />
               </ProtectedRoute>
             }
           />
