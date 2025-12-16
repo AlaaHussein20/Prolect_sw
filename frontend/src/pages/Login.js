@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from '../components/Navbar';
 import '../styles/Login.css';
 
 const Login = () => {
@@ -42,8 +43,10 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
+    <>
+      <Navbar />
+      <div className="login-container">
+        <div className="login-box">
         <h1>Welcome Back</h1>
         <h3>Login to Your Account</h3>
         
@@ -89,6 +92,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

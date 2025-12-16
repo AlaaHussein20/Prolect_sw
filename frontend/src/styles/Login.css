@@ -6,6 +6,7 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #1a0414 0%, #2b0720 50%, #40062a 100%);
   padding: 20px;
+  padding-top: 90px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #f3e9ef;
 }

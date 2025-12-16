@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from '../components/Navbar';
 import '../styles/Dashboard.css';
 
 const DoctorDashboard = () => {
@@ -170,6 +171,8 @@ const DoctorDashboard = () => {
 
   return (
     <div className={`dashboard-container ${darkMode ? 'dark-mode' : ''}`}>
+      <Navbar />
+      
       {/* Dark Mode Logo - Fixed Position */}
       <div 
         className="dark-mode-logo" 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 import '../styles/Register.css';
 
 function Register() {
@@ -77,11 +78,10 @@ function Register() {
   };
 
   return (
-    <div className="register-container">
-      {/* Top-left brand logo */}
-      <img src="/logo.svg" alt="Vezeeta Logo" className="register-page-logo" />
-      
-      <div className="register-form">
+    <>
+      <Navbar />
+      <div className="register-container">
+        <div className="register-form">
         <h2>Create Account</h2>
         <p className="subtitle">Join our Medical Platform</p>
 
@@ -196,6 +196,7 @@ function Register() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
