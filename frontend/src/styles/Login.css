@@ -1,13 +1,26 @@
 /* Login Page Styles */
+
+/* Reset body and html margins/padding */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  width: 100vw;
   background: linear-gradient(135deg, #1a0414 0%, #2b0720 50%, #40062a 100%);
   padding: 20px;
+  margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #f3e9ef;
+  box-sizing: border-box;
 }
 
 .login-box {
