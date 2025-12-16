@@ -42,8 +42,35 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
+    <>
+      <header style={{
+        padding: '16px 36px',
+        background: 'rgba(255, 255, 255, 0.95)',
+        borderBottom: '1px solid rgba(107, 191, 138, 0.2)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100,
+        backdropFilter: 'blur(10px)',
+      }}>
+        <span style={{
+          fontSize: 26,
+          fontWeight: 800,
+          background: 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          cursor: 'pointer',
+        }}>
+          vezeeto
+        </span>
+        <div style={{ fontSize: 14, color: '#5a7a65', fontWeight: 500 }}>
+          Your Medical Platform
+        </div>
+      </header>
+      <div className="login-container">
+        <div className="login-box">
         <h1>Welcome Back</h1>
         <h3>Login to Your Account</h3>
         
@@ -88,7 +115,8 @@ const Login = () => {
           </p>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

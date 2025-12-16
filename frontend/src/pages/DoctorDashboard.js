@@ -228,27 +228,94 @@ const DoctorDashboard = () => {
 
   return (
     <div className={`dashboard-container ${darkMode ? 'dark-mode' : ''}`}>
-      {/* Dark Mode Logo - Fixed Position */}
-      <div 
-        className="dark-mode-logo" 
-        onClick={handleToggleDarkMode}
-        title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-      >
-        {darkMode ? '🌙' : '☀️'}
-      </div>
-
-      {/* Header */}
-      <div className="dashboard-header">
-        <div>
-          <h1>Doctor Dashboard</h1>
-          <p className="welcome-text">Welcome back, Dr. {user?.name}!</p>
+      {/* Toolbar */}
+      <header style={{
+        padding: '16px 36px',
+        background: darkMode ? '#232b3e' : '#fff',
+        borderBottom: darkMode ? '1px solid rgba(107, 191, 138, 0.2)' : '1px solid rgba(107, 191, 138, 0.2)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100,
+        flexWrap: 'wrap',
+        gap: 16,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
+          <span style={{
+            fontSize: 26,
+            fontWeight: 800,
+            background: darkMode 
+              ? 'linear-gradient(135deg, #a8d5ba 0%, #6bbf8a 50%, #4b9b6e 100%)'
+              : 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            cursor: 'pointer',
+          }}>
+            vezeeto
+          </span>
         </div>
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-          <button onClick={handleLogout} className="logout-button">
+        
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontWeight: 600, color: darkMode ? '#e8f2ea' : '#0f1a14' }}>
+              Dr. {user?.name || 'Doctor'}
+            </div>
+            <div style={{ fontSize: 12, color: darkMode ? 'rgba(232,242,234,0.6)' : 'rgba(15,26,20,0.7)' }}>
+              Doctor
+            </div>
+          </div>
+          <div style={{
+            width: 44,
+            height: 44,
+            borderRadius: '50%',
+            background: darkMode 
+              ? 'linear-gradient(145deg, #a8d5ba 0%, #6bbf8a 100%)'
+              : 'linear-gradient(145deg, #6bbf8a 0%, #4b9b6e 100%)',
+            display: 'grid',
+            placeItems: 'center',
+            fontWeight: 700,
+            fontSize: 18,
+            color: '#0b1a12',
+          }}>
+            {user?.name?.[0]?.toUpperCase() || 'D'}
+          </div>
+          <button
+            onClick={handleToggleDarkMode}
+            style={{
+              background: darkMode ? 'rgba(168,213,186,0.08)' : 'rgba(168,213,186,0.35)',
+              border: darkMode ? '1px solid rgba(168,213,186,0.24)' : '1px solid rgba(75,155,110,0.35)',
+              color: darkMode ? '#f4fffa' : '#0f1a14',
+              padding: '10px 14px',
+              borderRadius: 12,
+              fontWeight: 600,
+              cursor: 'pointer',
+              fontSize: 14,
+              transition: 'all 0.2s',
+            }}
+            title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          >
+            {darkMode ? '☀️ Light' : '🌙 Dark'}
+          </button>
+          <button
+            onClick={handleLogout}
+            style={{
+              background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+              border: 'none',
+              color: '#fff',
+              padding: '10px 16px',
+              borderRadius: 12,
+              fontWeight: 600,
+              cursor: 'pointer',
+              fontSize: 14,
+              transition: 'all 0.2s',
+            }}
+          >
             Logout
           </button>
         </div>
-      </div>
+      </header>
 
       {/* Success and Error Messages */}
       {successMessage && (

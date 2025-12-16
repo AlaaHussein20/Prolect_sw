@@ -106,15 +106,74 @@ const AppointmentHistory = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: theme.appBg, color: theme.textPrimary, fontFamily: "'Poppins', sans-serif" }}>
-      <header style={{ padding: '16px 36px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: theme.headerBorder }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
-          <span style={{ fontSize: 26, fontWeight: 800, background: theme.primaryGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Appointment History</span>
-          <div style={{ fontSize: 14, color: theme.textMuted }}>Past appointments & visit notes</div>
+    <div style={{ minHeight: '100vh', background: theme.appBg, color: theme.textPrimary, fontFamily: "'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica Neue', Arial, sans-serif" }}>
+      <header style={{
+        padding: '16px 36px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderBottom: theme.headerBorder,
+        flexWrap: 'wrap',
+        gap: 16,
+        position: 'sticky',
+        top: 0,
+        zIndex: 100,
+        background: theme.appBg,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 18, flex: 1 }}>
+          <span style={{
+            fontSize: 26,
+            fontWeight: 800,
+            background: themeName === 'dark'
+              ? 'linear-gradient(135deg, #a8d5ba 0%, #6bbf8a 50%, #4b9b6e 100%)'
+              : 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            cursor: 'pointer',
+          }}>
+            vezeeto
+          </span>
+          <div style={{ fontSize: 14, color: theme.textMuted, fontWeight: 500 }}>Appointment History</div>
         </div>
 
-        <div style={{ display: 'flex', gap: 10 }}>
-          <button onClick={() => navigate('/patient-dashboard')} style={{ background: theme.cardBg, border: theme.cardBorder, padding: '10px 14px', borderRadius: 10, cursor: 'pointer', color: theme.textPrimary }}>← Dashboard</button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontWeight: 600, color: theme.textPrimary }}>
+              {user?.name || 'Patient'}
+            </div>
+            <div style={{ fontSize: 12, color: theme.textMuted }}>Patient</div>
+          </div>
+          <div style={{
+            width: 44,
+            height: 44,
+            borderRadius: '50%',
+            background: themeName === 'dark'
+              ? 'linear-gradient(145deg, #a8d5ba 0%, #6bbf8a 100%)'
+              : 'linear-gradient(145deg, #6bbf8a 0%, #4b9b6e 100%)',
+            display: 'grid',
+            placeItems: 'center',
+            fontWeight: 700,
+            fontSize: 18,
+            color: theme.primaryText,
+          }}>
+            {user?.name?.[0]?.toUpperCase() || 'P'}
+          </div>
+          <button 
+            onClick={() => navigate('/patient-dashboard')} 
+            style={{
+              background: theme.profileBg,
+              border: theme.profileBorder,
+              color: theme.profileText,
+              padding: '10px 14px',
+              borderRadius: 12,
+              fontWeight: 600,
+              cursor: 'pointer',
+              fontSize: 14,
+              transition: 'all 0.2s',
+            }}
+          >
+            ← Dashboard
+          </button>
         </div>
       </header>
 

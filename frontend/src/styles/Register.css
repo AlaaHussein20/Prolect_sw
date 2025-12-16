@@ -11,27 +11,27 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 74px);
   width: 100vw;
-  background: linear-gradient(135deg, #1a0414 0%, #2b0720 50%, #40062a 100%);
+  background: linear-gradient(145deg, #f4fff7 0%, #eef9f2 40%, #e4f2e9 100%);
   padding: 20px;
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #e1e1e1;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica Neue', Arial, sans-serif;
+  color: #0f1a14;
   box-sizing: border-box;
 }
 
 .register-form {
-  background-color: rgba(40, 20, 30, 0.95);
+  background-color: rgba(255, 255, 255, 0.95);
   padding: 40px;
   border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(75, 155, 110, 0.15);
   width: 100%;
-  max-width: 400px;
+  max-width: 440px;
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(107, 191, 138, 0.2);
 }
 
 .register-form::before {
@@ -44,11 +44,11 @@ body, html {
   background: linear-gradient(
     45deg,
     transparent,
-    rgba(255, 255, 255, 0.1),
+    rgba(107, 191, 138, 0.08),
     transparent
   );
   transform: rotate(45deg);
-  animation: shine 2s infinite;
+  animation: shine 3s infinite;
 }
 
 @keyframes shine {
@@ -61,32 +61,37 @@ body, html {
 }
 
 .register-form h2 {
-  color: #ff77b5;
+  color: #4b9b6e;
   margin-bottom: 10px;
   text-align: center;
   font-size: 32px;
-  font-weight: 600;
-  text-shadow: 0 0 10px rgba(255,119,181,0.18);
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(75, 155, 110, 0.1);
+  position: relative;
+  z-index: 1;
 }
 
 .register-form .subtitle {
-  color: #d9b7c9;
+  color: #5a7a65;
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 16px;
+  position: relative;
+  z-index: 1;
 }
 
 .form-group {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   position: relative;
+  z-index: 1;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  color: #e1e1e1;
-  font-weight: 500;
+  color: #0f1a14;
+  font-weight: 600;
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -95,93 +100,98 @@ body, html {
 .form-group input,
 .form-group select {
   width: 100%;
-  padding: 15px;
-  border: 2px solid #3a2430;
-  border-radius: 10px;
-  font-size: 16px;
+  padding: 14px;
+  border: 2px solid rgba(107, 191, 138, 0.3);
+  border-radius: 12px;
+  font-size: 15px;
   transition: all 0.3s ease;
-  background-color: rgba(20, 18, 22, 0.9);
-  color: #e1e1e1;
+  background-color: #f8fff9;
+  color: #0f1a14;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  box-sizing: border-box;
 }
 
 .form-group select {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff77b5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234b9b6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 15px center;
-  background-size: 15px;
+  background-size: 18px;
   padding-right: 45px;
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #ff77b5;
-  box-shadow: 0 0 0 3px rgba(255,119,181,0.12);
-  transform: translateY(-1px);
-  background-color: rgba(30, 20, 24, 0.9);
+  border-color: #6bbf8a;
+  box-shadow: 0 0 0 4px rgba(107, 191, 138, 0.1);
+  background-color: #ffffff;
 }
 
 .form-group select option {
-  background-color: #1e2028;
-  color: #e1e1e1;
+  background-color: #ffffff;
+  color: #0f1a14;
   padding: 15px;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .register-button {
   width: 100%;
-  padding: 16px;
-  background: linear-gradient(135deg, #ff9ccf 0%, #ff3d8a 100%);
+  padding: 14px;
+  background: linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 100%);
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 1px;
   position: relative;
   overflow: hidden;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(75, 155, 110, 0.2);
+  z-index: 1;
 }
 
 .register-button:hover {
-  background: linear-gradient(135deg, #ff7ab8 0%, #ff2f72 100%);
+  background: linear-gradient(135deg, #7bcf9a 0%, #5bab7e 100%);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255,119,181,0.12);
+  box-shadow: 0 6px 20px rgba(75, 155, 110, 0.3);
 }
 
 .register-button:active {
   transform: translateY(0);
-  box-shadow: 0 2px 5px rgba(255,119,181,0.08);
+  box-shadow: 0 3px 8px rgba(75, 155, 110, 0.2);
 }
 
 .error-message {
-  background-color: rgba(255, 100, 120, 0.08);
-  color: #ff6b6b;
-  padding: 15px;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  padding: 12px;
   border-radius: 10px;
   margin-bottom: 20px;
   text-align: center;
-  border-left: 4px solid #ff6b81;
+  border-left: 4px solid #ef4444;
   font-size: 14px;
   animation: fadeIn 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .success-message {
-  background-color: rgba(39, 174, 96, 0.15);
-  color: #2ecc71;
-  padding: 15px;
+  background-color: rgba(107, 191, 138, 0.15);
+  color: #4b9b6e;
+  padding: 12px;
   border-radius: 10px;
   margin-bottom: 20px;
   text-align: center;
-  border-left: 4px solid #27ae60;
+  border-left: 4px solid #6bbf8a;
   font-size: 14px;
   animation: fadeIn 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes fadeIn {
@@ -196,36 +206,36 @@ body, html {
 }
 
 .register-link {
-  margin-top: 30px;
+  margin-top: 24px;
   text-align: center;
   position: relative;
   padding-top: 20px;
+  z-index: 1;
 }
 
 .register-link::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 25%;
-  right: 25%;
+  left: 20%;
+  right: 20%;
   height: 1px;
   background: linear-gradient(
     to right,
     transparent,
-    rgba(255, 255, 255, 0.1),
+    rgba(107, 191, 138, 0.3),
     transparent
   );
 }
 
 .register-link a {
-  color: #ff77b5;
+  color: #4b9b6e;
   text-decoration: none;
   transition: all 0.3s ease;
-  font-weight: 500;
+  font-weight: 600;
   position: relative;
   margin-left: 0.5rem;
 }
-
 
 .register-link a::after {
   content: '';
@@ -234,14 +244,13 @@ body, html {
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #ff77b5;
+  background-color: #6bbf8a;
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
 
 .register-link a:hover {
-  color: #ffc1db;
-  text-shadow: 0 0 10px rgba(255,119,181,0.14);
+  color: #6bbf8a;
 }
 
 .register-link a:hover::after {
@@ -250,6 +259,6 @@ body, html {
 
 @media (max-width: 480px) {
   .register-form {
-    padding: 20px;
+    padding: 30px 24px;
   }
 }

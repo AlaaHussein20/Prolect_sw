@@ -1,0 +1,17 @@
+:root {
+  --app-font: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica Neue', Arial, sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--app-font);
+}
+
+* {
+  font-family: var(--app-font);
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}

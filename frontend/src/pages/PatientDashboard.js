@@ -342,7 +342,7 @@ const PatientDashboard = () => {
         minHeight: '100vh',
         background: theme.appBg,
         color: theme.textPrimary,
-        fontFamily: "'Poppins', sans-serif",
+        fontFamily: "'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica Neue', Arial, sans-serif",
       }}>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: 48, marginBottom: 16 }}>⏳</div>
@@ -363,7 +363,7 @@ const PatientDashboard = () => {
         minHeight: '100vh',
         background: theme.appBg,
         color: theme.textPrimary,
-        fontFamily: "'Poppins', sans-serif",
+        fontFamily: "'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica Neue', Arial, sans-serif",
       }}>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: 48, marginBottom: 16 }}>🔒</div>
@@ -394,7 +394,7 @@ const PatientDashboard = () => {
       minHeight: '100vh',
       background: theme.appBg,
       color: theme.textPrimary,
-      fontFamily: "'Poppins', sans-serif",
+      fontFamily: "'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica Neue', Arial, sans-serif",
     }}>
       {/* Header */}
       <header style={{
