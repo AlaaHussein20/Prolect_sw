@@ -310,6 +310,10 @@ const PatientDashboard = () => {
   const upcomingAppointments = appointments
     .filter((apt) => new Date(apt.date) >= now)
     .sort((a, b) => new Date(a.date) - new Date(b.date));
+  
+  const pastAppointments = appointments
+    .filter((apt) => new Date(apt.date) < now)
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const specializationGroups = doctors.reduce((acc, doctor) => {
     const spec = doctor.specialization || 'Other';
@@ -865,6 +869,114 @@ const PatientDashboard = () => {
                       </button>
                     </div>
                   ))}
+                </div>
+              )}
+            </div>
+
+            {/* Appointment History */}
+            <div style={{
+              borderRadius: 16,
+              border: theme.sidebarBorder,
+              background: theme.sidebarBg,
+              padding: 20,
+            }}>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 12, 
+                marginBottom: 16,
+                paddingBottom: 12,
+                borderBottom: theme.headerBorder,
+              }}>
+                <span style={{ fontSize: 24 }}>📜</span>
+                <h3 style={{ margin: 0, color: theme.textPrimary, fontSize: 18 }}>
+                  Appointment History
+                </h3>
+              </div>
+              
+              {pastAppointments.length === 0 ? (
+                <div style={{ 
+                  textAlign: 'center', 
+                  padding: '32px 16px',
+                  color: theme.textMuted,
+                }}>
+                  <div style={{ fontSize: 48, marginBottom: 12 }}>📋</div>
+                  <div style={{ fontSize: 14, fontWeight: 500 }}>
+                    No past appointments
+                  </div>
+                  <div style={{ fontSize: 12, marginTop: 4 }}>
+                    Your appointment history will appear here
+                  </div>
+                </div>
+              ) : (
+                <div style={{ display: 'grid', gap: 12 }}>
+                  {pastAppointments.slice(0, 5).map((apt) => (
+                    <div
+                      key={apt._id}
+                      style={{
+                        padding: 16,
+                        borderRadius: 12,
+                        border: theme.sidebarCardBorder,
+                        background: theme.sidebarCardBg,
+                        transition: 'all 0.2s',
+                        opacity: 0.85,
+                      }}
+                    >
+                      <div style={{ 
+                        fontWeight: 700, 
+                        color: theme.textPrimary,
+                        fontSize: 15,
+                        marginBottom: 6,
+                      }}>
+                        Dr. {apt.doctor?.name || 'Doctor'}
+                      </div>
+                      <div style={{ 
+                        fontSize: 13, 
+                        color: theme.textMuted,
+                        marginBottom: 4,
+                      }}>
+                        📅 {formatDate(apt.date)}
+                      </div>
+                      <div style={{ 
+                        fontSize: 13, 
+                        color: theme.textMuted,
+                        marginBottom: 8,
+                      }}>
+                        🕒 {apt.time}
+                      </div>
+                      <div style={{
+                        display: 'inline-block',
+                        padding: '6px 12px',
+                        borderRadius: 8,
+                        background: apt.status === 'completed' 
+                          ? 'rgba(34,197,94,0.2)' 
+                          : apt.status === 'canceled' 
+                          ? 'rgba(239,68,68,0.2)' 
+                          : theme.badge2Bg,
+                        color: apt.status === 'completed' 
+                          ? '#22c55e' 
+                          : apt.status === 'canceled' 
+                          ? '#ef4444' 
+                          : theme.badge2Text,
+                        fontSize: 12,
+                        fontWeight: 600,
+                      }}>
+                        {apt.status === 'completed' && '✅ Completed'}
+                        {apt.status === 'canceled' && '❌ Canceled'}
+                        {apt.status === 'scheduled' && '📅 Completed'}
+                      </div>
+                    </div>
+                  ))}
+                  {pastAppointments.length > 5 && (
+                    <div style={{ 
+                      textAlign: 'center', 
+                      fontSize: 13, 
+                      color: theme.textMuted,
+                      marginTop: 8,
+                    }}>
+                      +{pastAppointments.length - 5} more past appointments
+                    </div>
+                  )}
                 </div>
               )}
             </div>
