@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/Register.css';
+
+// Green color palette
+const brandGradient = 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)';
 
 function Register() {
   const navigate = useNavigate();
@@ -90,7 +93,8 @@ function Register() {
         zIndex: 100,
         backdropFilter: 'blur(10px)',
       }}>
-        <span style={{
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <span style={{
           fontSize: 26,
           fontWeight: 800,
           background: 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)',
@@ -98,8 +102,9 @@ function Register() {
           WebkitTextFillColor: 'transparent',
           cursor: 'pointer',
         }}>
-          vezeeto
-        </span>
+            vezeeto
+          </span>
+        </Link>
         <div style={{ fontSize: 14, color: '#5a7a65', fontWeight: 500 }}>
           Your Medical Platform
         </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Dashboard.css';
 
@@ -407,16 +407,18 @@ const PatientDashboard = () => {
         gap: 16,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 18, flex: 1, minWidth: 300 }}>
-          <span style={{
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <span style={{
             fontSize: 26,
             fontWeight: 800,
             background: theme.logoGradient,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             cursor: 'pointer',
-          }}>
-            vezeeto
-          </span>
+            }}>
+              vezeeto
+            </span>
+          </Link>
           <div style={{ position: 'relative', flex: 1, maxWidth: 480 }}>
             <span style={{ 
               position: 'absolute', 
