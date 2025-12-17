@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Dashboard.css';
+import Footer from '../components/Footer';
 
 const themes = {
   dark: {
@@ -223,6 +224,8 @@ const AppointmentHistory = () => {
           )}
         </div>
       </main>
+
+      <Footer theme={theme} />
     </div>
   );
 };

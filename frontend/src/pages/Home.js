@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Dashboard.css';
+import Footer from '../components/Footer';
 
 const Home = () => {
   const [isDark, setIsDark] = useState(false);
@@ -52,10 +53,9 @@ const Home = () => {
           <span style={{
             fontSize: 26,
             fontWeight: 800,
-            background: theme.logoGradient,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
+            color: isDark ? '#a8d5ba' : '#4b9b6e',
             cursor: 'pointer',
+            transition: 'color 0.2s',
           }}>
             vezeeto
           </span>
@@ -211,6 +211,13 @@ const Home = () => {
           </div>
         </section>
       </main>
+
+      <Footer theme={{
+        appBg: isDark ? 'linear-gradient(145deg, #0c1410 0%, #0f1c15 40%, #13261c 100%)' : 'linear-gradient(145deg, #f4fff7 0%, #eef9f2 40%, #e4f2e9 100%)',
+        textPrimary: isDark ? '#e8f2ea' : '#0f1a14',
+        textMuted: isDark ? 'rgba(232,242,234,0.6)' : 'rgba(15,26,20,0.7)',
+        headerBorder: isDark ? '1px solid rgba(46,125,92,0.2)' : '1px solid rgba(75,155,110,0.15)',
+      }} />
     </div>
   );
 };

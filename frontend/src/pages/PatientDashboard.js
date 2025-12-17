@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Dashboard.css';
+import Footer from '../components/Footer';
 
 // Theme configuration
 const themes = {
@@ -411,10 +412,9 @@ const PatientDashboard = () => {
             <span style={{
             fontSize: 26,
             fontWeight: 800,
-            background: theme.logoGradient,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
+            color: themeName === 'dark' ? '#a8d5ba' : '#4b9b6e',
             cursor: 'pointer',
+            transition: 'color 0.2s',
             }}>
               vezeeto
             </span>
@@ -1065,6 +1065,8 @@ const PatientDashboard = () => {
           </div>
         </div>
       )}
+
+      <Footer theme={theme} />
     </div>
   );
 };

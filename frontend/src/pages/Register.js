@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/Register.css';
-
-// Green color palette
-const brandGradient = 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)';
+import Footer from '../components/Footer';
 
 function Register() {
   const navigate = useNavigate();
@@ -97,10 +95,9 @@ function Register() {
           <span style={{
           fontSize: 26,
           fontWeight: 800,
-          background: 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
+          color: '#4b9b6e',
           cursor: 'pointer',
+          transition: 'color 0.2s',
         }}>
             vezeeto
           </span>
@@ -236,6 +233,8 @@ function Register() {
         </div>
         </div>
       </div>
+
+      <Footer theme={{ appBg: 'rgba(255, 255, 255, 0.95)', textPrimary: '#0f1a14', textMuted: 'rgba(15,26,20,0.7)', headerBorder: '1px solid rgba(107,191,138,0.2)' }} />
     </>
   );
 }

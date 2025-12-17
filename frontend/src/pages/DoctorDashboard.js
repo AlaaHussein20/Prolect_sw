@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Dashboard.css';
+import Footer from '../components/Footer';
 
 const DoctorDashboard = () => {
   const [user] = useState(() => JSON.parse(localStorage.getItem('user')));
@@ -247,12 +248,9 @@ const DoctorDashboard = () => {
             <span style={{
             fontSize: 26,
             fontWeight: 800,
-            background: darkMode 
-              ? 'linear-gradient(135deg, #a8d5ba 0%, #6bbf8a 50%, #4b9b6e 100%)'
-              : 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
+            color: darkMode ? '#a8d5ba' : '#4b9b6e',
             cursor: 'pointer',
+            transition: 'color 0.2s',
             }}>
               vezeeto
             </span>
@@ -559,6 +557,13 @@ const DoctorDashboard = () => {
           )}
         </div>
       </div>
+
+      <Footer theme={{
+        appBg: darkMode ? 'linear-gradient(145deg, #0c1410 0%, #0f1c15 40%, #13261c 100%)' : 'linear-gradient(145deg, #f4fff7 0%, #eef9f2 40%, #e4f2e9 100%)',
+        textPrimary: darkMode ? '#e8f2ea' : '#0f1a14',
+        textMuted: darkMode ? 'rgba(232,242,234,0.6)' : 'rgba(15,26,20,0.7)',
+        headerBorder: darkMode ? '1px solid rgba(46,125,92,0.2)' : '1px solid rgba(75,155,110,0.15)',
+      }} />
     </div>
   );
 };

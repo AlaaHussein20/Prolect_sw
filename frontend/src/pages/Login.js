@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Login.css';
-
-// Green color palette instead of blue
-const brandGradient = 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)';
+import Footer from '../components/Footer';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -62,10 +60,9 @@ const Login = () => {
           <span style={{
           fontSize: 26,
           fontWeight: 800,
-          background: 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
+          color: '#4b9b6e',
           cursor: 'pointer',
+          transition: 'color 0.2s',
         }}>
             vezeeto
           </span>
@@ -121,6 +118,8 @@ const Login = () => {
         </div>
       </div>
       </div>
+
+      <Footer theme={{ appBg: 'rgba(255, 255, 255, 0.95)', textPrimary: '#0f1a14', textMuted: 'rgba(15,26,20,0.7)', headerBorder: '1px solid rgba(107,191,138,0.2)' }} />
     </>
   );
 };
