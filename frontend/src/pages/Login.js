@@ -3,9 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Login.css';
 
-// Green color palette instead of blue
-const brandGradient = 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)';
-
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
