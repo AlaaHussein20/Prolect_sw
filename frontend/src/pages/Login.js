@@ -67,8 +67,28 @@ const Login = () => {
             vezeeto
           </span>
         </Link>
-        <div style={{ fontSize: 14, color: '#5a7a65', fontWeight: 500 }}>
-          Your Medical Platform
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+          <div style={{ fontSize: 14, color: '#5a7a65', fontWeight: 500 }}>
+            Your Medical Platform
+          </div>
+          <Link to="/about" style={{ textDecoration: 'none' }}>
+            <button style={{
+              background: 'transparent',
+              border: 'none',
+              color: '#4b9b6e',
+              cursor: 'pointer',
+              fontSize: 14,
+              fontWeight: 600,
+              padding: '8px 12px',
+              borderRadius: 8,
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => e.target.style.background = 'rgba(107,191,138,0.1)'}
+            onMouseLeave={(e) => e.target.style.background = 'transparent'}
+            >
+              About Us
+            </button>
+          </Link>
         </div>
       </header>
       <div className="login-container">

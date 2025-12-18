@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
+import AboutUs from './pages/AboutUs';
 import PatientDashboard from './pages/PatientDashboard';
 import DoctorDashboard from './pages/DoctorDashboard';
 import AppointmentHistory from './pages/AppointmentHistory';
@@ -24,6 +25,7 @@ function App() {
           {/* Public Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/about" element={<AboutUs />} />
           <Route path="/" element={<Home />} />
 
           {/* Protected Routes */}

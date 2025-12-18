@@ -61,6 +61,24 @@ const Home = () => {
           </span>
         </Link>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 14 }}>
+          <Link to="/about" style={{ textDecoration: 'none' }}>
+            <button style={{
+              background: 'transparent',
+              border: 'none',
+              color: theme.textPrimary,
+              cursor: 'pointer',
+              fontSize: 14,
+              fontWeight: 600,
+              padding: '8px 12px',
+              borderRadius: 8,
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => e.target.style.background = isDark ? 'rgba(168,213,186,0.1)' : 'rgba(107,191,138,0.1)'}
+            onMouseLeave={(e) => e.target.style.background = 'transparent'}
+            >
+              About Us
+            </button>
+          </Link>
           <button onClick={() => setIsDark(!isDark)} style={{
             background: isDark ? 'rgba(168,213,186,0.08)' : 'rgba(168,213,186,0.35)',
             border: isDark ? '1px solid rgba(168,213,186,0.24)' : '1px solid rgba(75,155,110,0.35)',
