@@ -74,6 +74,9 @@ const AboutUs = () => {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+          <div style={{ fontSize: 14, color: theme.textMuted, fontWeight: 500 }}>
+            Your Medical Platform
+          </div>
           <button
             onClick={() => navigate('/')}
             style={{

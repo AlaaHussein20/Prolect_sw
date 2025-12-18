@@ -422,6 +422,9 @@ const PatientDashboard = () => {
               vezeeto
             </span>
           </Link>
+          <div style={{ fontSize: 14, color: theme.textMuted, fontWeight: 500 }}>
+            Your Medical Platform
+          </div>
           <div style={{ position: 'relative', flex: 1, maxWidth: 480 }}>
             <span style={{ 
               position: 'absolute', 

@@ -66,6 +66,9 @@ const Home = () => {
           </span>
         </Link>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 14 }}>
+          <div style={{ fontSize: 14, color: theme.textMuted, fontWeight: 500 }}>
+            Your Medical Platform
+          </div>
           <Link to="/about" style={{ textDecoration: 'none' }}>
             <button style={{
               background: 'transparent',

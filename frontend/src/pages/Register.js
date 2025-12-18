@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../styles/Register.css';
 import Footer from '../components/Footer';
 
@@ -29,7 +29,6 @@ const themes = {
 };
 
 function Register() {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
