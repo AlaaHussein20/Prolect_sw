@@ -268,3 +268,7 @@ const Login = () => {
 
       <Footer theme={{ appBg: theme.appBg, textPrimary: theme.textPrimary, textMuted: theme.textMuted, headerBorder: theme.headerBorder }} />
     </div>
+  );
+};
+
+export default Login;
