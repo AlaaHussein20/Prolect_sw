@@ -36,7 +36,7 @@ const Home = () => {
     <div style={{ minHeight: '100vh', background: theme.appBg, color: theme.textPrimary, fontFamily: "'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica Neue', Arial, sans-serif" }}>
       {/* Toolbar Header */}
       <header style={{
-        padding: '16px 36px',
+        padding: '20px 48px',
         background: theme.headerBg,
         borderBottom: theme.headerBorder,
         display: 'flex',
@@ -105,14 +105,14 @@ const Home = () => {
         </div>
       </header>
 
-      <main style={{ padding: 28 }}>
+      <main style={{ padding: '40px 48px', maxWidth: '1400px', margin: '0 auto' }}>
         {/* Hero Section */}
-        <section style={{ maxWidth: 1080, margin: '28px auto' }}>
-          <div style={{ padding: 32, borderRadius: 16, background: theme.heroBg, border: theme.heroBorder, textAlign: 'center' }}>
-            <h1 style={{ margin: '0 0 12px 0', fontSize: '2.4rem', fontWeight: 800, color: theme.textPrimary }}>
+        <section style={{ maxWidth: 1200, margin: '0 auto 48px' }}>
+          <div style={{ padding: '48px 40px', borderRadius: 20, background: theme.heroBg, border: theme.heroBorder, textAlign: 'center' }}>
+            <h1 style={{ margin: '0 0 16px 0', fontSize: '2.8rem', fontWeight: 800, color: theme.textPrimary, lineHeight: 1.2 }}>
               Find Your Perfect Doctor
             </h1>
-            <p style={{ margin: 0, color: theme.textMuted, fontSize: '1.1rem', maxWidth: 700, marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.6 }}>
+            <p style={{ margin: '0 0 32px 0', color: theme.textMuted, fontSize: '1.15rem', maxWidth: 700, marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.7 }}>
               vezeeto connects you with trusted healthcare professionals. Book appointments, manage your health records, and get expert care—all in one place.
             </p>
 
@@ -133,85 +133,86 @@ const Home = () => {
         </section>
 
         {/* Features Section */}
-        <section style={{ maxWidth: 1080, margin: '40px auto' }}>
-          <h2 style={{ textAlign: 'center', marginBottom: 28, fontSize: '1.8rem', color: theme.textPrimary }}>Why Choose vezeeto?</h2>
-          <div style={{ display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
-            <div style={{ padding: 20, borderRadius: 14, background: theme.cardBg, border: theme.cardBorder }}>
-              <div style={{ fontSize: 28, marginBottom: 12 }}>🔍</div>
-              <h3 style={{ margin: '0 0 8px 0', color: theme.textPrimary }}>Find Specialists</h3>
-              <p style={{ margin: 0, color: theme.textMuted, fontSize: 14, lineHeight: 1.5 }}>Browse doctors by specialization, experience, and patient reviews.</p>
+        <section style={{ maxWidth: 1200, margin: '0 auto 48px' }}>
+          <h2 style={{ textAlign: 'center', marginBottom: 32, fontSize: '2rem', color: theme.textPrimary, fontWeight: 700 }}>Why Choose vezeeto?</h2>
+          <div style={{ display: 'grid', gap: 20, gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+            <div style={{ padding: 28, borderRadius: 16, background: theme.cardBg, border: theme.cardBorder }}>
+              <div style={{ fontSize: 36, marginBottom: 16 }}>🔍</div>
+              <h3 style={{ margin: '0 0 12px 0', color: theme.textPrimary, fontSize: '1.25rem' }}>Find Specialists</h3>
+              <p style={{ margin: 0, color: theme.textMuted, fontSize: 15, lineHeight: 1.6 }}>Browse doctors by specialization, experience, and patient reviews.</p>
             </div>
-            <div style={{ padding: 20, borderRadius: 14, background: theme.cardBg, border: theme.cardBorder }}>
-              <div style={{ fontSize: 28, marginBottom: 12 }}>📅</div>
-              <h3 style={{ margin: '0 0 8px 0', color: theme.textPrimary }}>Instant Booking</h3>
-              <p style={{ margin: 0, color: theme.textMuted, fontSize: 14, lineHeight: 1.5 }}>Check real-time availability and book appointments in seconds.</p>
+            <div style={{ padding: 28, borderRadius: 16, background: theme.cardBg, border: theme.cardBorder }}>
+              <div style={{ fontSize: 36, marginBottom: 16 }}>📅</div>
+              <h3 style={{ margin: '0 0 12px 0', color: theme.textPrimary, fontSize: '1.25rem' }}>Instant Booking</h3>
+              <p style={{ margin: 0, color: theme.textMuted, fontSize: 15, lineHeight: 1.6 }}>Check real-time availability and book appointments in seconds.</p>
             </div>
-            <div style={{ padding: 20, borderRadius: 14, background: theme.cardBg, border: theme.cardBorder }}>
-              <div style={{ fontSize: 28, marginBottom: 12 }}>🔒</div>
-              <h3 style={{ margin: '0 0 8px 0', color: theme.textPrimary }}>Secure Records</h3>
-              <p style={{ margin: 0, color: theme.textMuted, fontSize: 14, lineHeight: 1.5 }}>Your medical history and appointments are encrypted and private.</p>
+            <div style={{ padding: 28, borderRadius: 16, background: theme.cardBg, border: theme.cardBorder }}>
+              <div style={{ fontSize: 36, marginBottom: 16 }}>🔒</div>
+              <h3 style={{ margin: '0 0 12px 0', color: theme.textPrimary, fontSize: '1.25rem' }}>Secure Records</h3>
+              <p style={{ margin: 0, color: theme.textMuted, fontSize: 15, lineHeight: 1.6 }}>Your medical history and appointments are encrypted and private.</p>
             </div>
-            <div style={{ padding: 20, borderRadius: 14, background: theme.cardBg, border: theme.cardBorder }}>
-              <div style={{ fontSize: 28, marginBottom: 12 }}>💬</div>
-              <h3 style={{ margin: '0 0 8px 0', color: theme.textPrimary }}>Easy Management</h3>
-              <p style={{ margin: 0, color: theme.textMuted, fontSize: 14, lineHeight: 1.5 }}>Reschedule, cancel, or view your appointment history anytime.</p>
+            <div style={{ padding: 28, borderRadius: 16, background: theme.cardBg, border: theme.cardBorder }}>
+              <div style={{ fontSize: 36, marginBottom: 16 }}>💬</div>
+              <h3 style={{ margin: '0 0 12px 0', color: theme.textPrimary, fontSize: '1.25rem' }}>Easy Management</h3>
+              <p style={{ margin: 0, color: theme.textMuted, fontSize: 15, lineHeight: 1.6 }}>Reschedule, cancel, or view your appointment history anytime.</p>
             </div>
-            <div style={{ padding: 20, borderRadius: 14, background: theme.cardBg, border: theme.cardBorder }}>
-              <div style={{ fontSize: 28, marginBottom: 12 }}>⭐</div>
-              <h3 style={{ margin: '0 0 8px 0', color: theme.textPrimary }}>Trusted Network</h3>
-              <p style={{ margin: 0, color: theme.textMuted, fontSize: 14, lineHeight: 1.5 }}>Connect with verified healthcare professionals across multiple fields.</p>
+            <div style={{ padding: 28, borderRadius: 16, background: theme.cardBg, border: theme.cardBorder }}>
+              <div style={{ fontSize: 36, marginBottom: 16 }}>⭐</div>
+              <h3 style={{ margin: '0 0 12px 0', color: theme.textPrimary, fontSize: '1.25rem' }}>Trusted Network</h3>
+              <p style={{ margin: 0, color: theme.textMuted, fontSize: 15, lineHeight: 1.6 }}>Connect with verified healthcare professionals across multiple fields.</p>
             </div>
-            <div style={{ padding: 20, borderRadius: 14, background: theme.cardBg, border: theme.cardBorder }}>
-              <div style={{ fontSize: 28, marginBottom: 12 }}>🏥</div>
-              <h3 style={{ margin: '0 0 8px 0', color: theme.textPrimary }}>All Specializations</h3>
-              <p style={{ margin: 0, color: theme.textMuted, fontSize: 14, lineHeight: 1.5 }}>From cardiology to dermatology, find experts in every field.</p>
+            <div style={{ padding: 28, borderRadius: 16, background: theme.cardBg, border: theme.cardBorder }}>
+              <div style={{ fontSize: 36, marginBottom: 16 }}>🏥</div>
+              <h3 style={{ margin: '0 0 12px 0', color: theme.textPrimary, fontSize: '1.25rem' }}>All Specializations</h3>
+              <p style={{ margin: 0, color: theme.textMuted, fontSize: 15, lineHeight: 1.6 }}>From cardiology to dermatology, find experts in every field.</p>
             </div>
           </div>
         </section>
 
         {/* How It Works */}
-        <section style={{ maxWidth: 1080, margin: '40px auto' }}>
-          <h2 style={{ textAlign: 'center', marginBottom: 28, fontSize: '1.8rem', color: theme.textPrimary }}>How It Works</h2>
-          <div style={{ display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', textAlign: 'center' }}>
-            <div>
-              <div style={{ width: 50, height: 50, borderRadius: '50%', background: theme.primaryGradient, color: isDark ? '#0b1a12' : '#f6fff9', fontWeight: 800, fontSize: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>1</div>
-              <h4 style={{ margin: '0 0 8px 0', color: theme.textPrimary }}>Create Account</h4>
-              <p style={{ margin: 0, color: theme.textMuted, fontSize: 13 }}>Sign up as a patient or doctor in minutes.</p>
+        <section style={{ maxWidth: 1200, margin: '0 auto 48px' }}>
+          <h2 style={{ textAlign: 'center', marginBottom: 32, fontSize: '2rem', color: theme.textPrimary, fontWeight: 700 }}>How It Works</h2>
+          <div style={{ display: 'grid', gap: 24, gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', textAlign: 'center' }}>
+            <div style={{ padding: '24px 20px' }}>
+              <div style={{ width: 60, height: 60, borderRadius: '50%', background: theme.primaryGradient, color: isDark ? '#0b1a12' : '#f6fff9', fontWeight: 800, fontSize: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>1</div>
+              <h4 style={{ margin: '0 0 12px 0', color: theme.textPrimary, fontSize: '1.15rem' }}>Create Account</h4>
+              <p style={{ margin: 0, color: theme.textMuted, fontSize: 14, lineHeight: 1.6 }}>Sign up as a patient or doctor in minutes.</p>
             </div>
-            <div>
-              <div style={{ width: 50, height: 50, borderRadius: '50%', background: theme.primaryGradient, color: isDark ? '#0b1a12' : '#f6fff9', fontWeight: 800, fontSize: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>2</div>
-              <h4 style={{ margin: '0 0 8px 0', color: theme.textPrimary }}>Search & Browse</h4>
-              <p style={{ margin: 0, color: theme.textMuted, fontSize: 13 }}>Find doctors by specialization and availability.</p>
+            <div style={{ padding: '24px 20px' }}>
+              <div style={{ width: 60, height: 60, borderRadius: '50%', background: theme.primaryGradient, color: isDark ? '#0b1a12' : '#f6fff9', fontWeight: 800, fontSize: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>2</div>
+              <h4 style={{ margin: '0 0 12px 0', color: theme.textPrimary, fontSize: '1.15rem' }}>Search & Browse</h4>
+              <p style={{ margin: 0, color: theme.textMuted, fontSize: 14, lineHeight: 1.6 }}>Find doctors by specialization and availability.</p>
             </div>
-            <div>
-              <div style={{ width: 50, height: 50, borderRadius: '50%', background: theme.primaryGradient, color: isDark ? '#0b1a12' : '#f6fff9', fontWeight: 800, fontSize: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>3</div>
-              <h4 style={{ margin: '0 0 8px 0', color: theme.textPrimary }}>Book & Confirm</h4>
-              <p style={{ margin: 0, color: theme.textMuted, fontSize: 13 }}>Select a time slot and confirm your appointment.</p>
+            <div style={{ padding: '24px 20px' }}>
+              <div style={{ width: 60, height: 60, borderRadius: '50%', background: theme.primaryGradient, color: isDark ? '#0b1a12' : '#f6fff9', fontWeight: 800, fontSize: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>3</div>
+              <h4 style={{ margin: '0 0 12px 0', color: theme.textPrimary, fontSize: '1.15rem' }}>Book & Confirm</h4>
+              <p style={{ margin: 0, color: theme.textMuted, fontSize: 14, lineHeight: 1.6 }}>Select a time slot and confirm your appointment.</p>
             </div>
-            <div>
-              <div style={{ width: 50, height: 50, borderRadius: '50%', background: theme.primaryGradient, color: isDark ? '#0b1a12' : '#f6fff9', fontWeight: 800, fontSize: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>4</div>
-              <h4 style={{ margin: '0 0 8px 0', color: theme.textPrimary }}>Attend & Review</h4>
-              <p style={{ margin: 0, color: theme.textMuted, fontSize: 13 }}>Complete your visit and share your experience.</p>
+            <div style={{ padding: '24px 20px' }}>
+              <div style={{ width: 60, height: 60, borderRadius: '50%', background: theme.primaryGradient, color: isDark ? '#0b1a12' : '#f6fff9', fontWeight: 800, fontSize: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>4</div>
+              <h4 style={{ margin: '0 0 12px 0', color: theme.textPrimary, fontSize: '1.15rem' }}>Attend & Review</h4>
+              <p style={{ margin: 0, color: theme.textMuted, fontSize: 14, lineHeight: 1.6 }}>Complete your visit and share your experience.</p>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section style={{ maxWidth: 1080, margin: '40px auto 60px', textAlign: 'center' }}>
-          <div style={{ padding: 32, borderRadius: 16, background: theme.primaryGradient }}>
-            <h2 style={{ margin: '0 0 12px 0', fontSize: '1.8rem', color: isDark ? '#0b1a12' : '#f6fff9' }}>Ready to Book Your Appointment?</h2>
-            <p style={{ margin: 0, color: isDark ? 'rgba(11,26,18,0.8)' : 'rgba(246,255,249,0.9)', fontSize: '1.1rem', marginBottom: 20 }}>
+        <section style={{ maxWidth: 1200, margin: '0 auto 64px', textAlign: 'center', padding: '0 40px' }}>
+          <div style={{ padding: 48, borderRadius: 20, background: theme.primaryGradient }}>
+            <h2 style={{ margin: '0 0 16px 0', fontSize: '2rem', color: isDark ? '#0b1a12' : '#f6fff9', fontWeight: 700 }}>Ready to Book Your Appointment?</h2>
+            <p style={{ margin: 0, color: isDark ? 'rgba(11,26,18,0.8)' : 'rgba(246,255,249,0.9)', fontSize: '1.15rem', marginBottom: 24, lineHeight: 1.5 }}>
               Join thousands of patients who trust vezeeto for their healthcare needs.
             </p>
             <Link to="/register" style={{
               textDecoration: 'none',
               background: isDark ? '#e8f2ea' : '#0f1a14',
               color: isDark ? '#0f1a14' : '#e8f2ea',
-              padding: '14px 32px',
-              borderRadius: 10,
+              padding: '16px 40px',
+              borderRadius: 12,
               fontWeight: 700,
-              fontSize: 16,
+              fontSize: 17,
               display: 'inline-block',
+              transition: 'transform 0.2s',
             }}>
               Create Free Account
             </Link>

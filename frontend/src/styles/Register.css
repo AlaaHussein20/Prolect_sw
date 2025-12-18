@@ -11,10 +11,10 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 74px);
+  min-height: calc(100vh - 80px);
   width: 100vw;
   background: linear-gradient(145deg, #f4fff7 0%, #eef9f2 40%, #e4f2e9 100%);
-  padding: 20px;
+  padding: 40px 20px;
   margin: 0;
   font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica Neue', Arial, sans-serif;
   color: #0f1a14;
@@ -23,11 +23,11 @@ body, html {
 
 .register-form {
   background-color: rgba(255, 255, 255, 0.95);
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(75, 155, 110, 0.15);
+  padding: 48px;
+  border-radius: 24px;
+  box-shadow: 0 12px 36px rgba(75, 155, 110, 0.18);
   width: 100%;
-  max-width: 440px;
+  max-width: 480px;
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(10px);
@@ -62,9 +62,9 @@ body, html {
 
 .register-form h2 {
   color: #4b9b6e;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   text-align: center;
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 700;
   text-shadow: 0 2px 8px rgba(75, 155, 110, 0.1);
   position: relative;
@@ -73,16 +73,16 @@ body, html {
 
 .register-form .subtitle {
   color: #5a7a65;
-  margin-bottom: 30px;
+  margin-bottom: 36px;
   text-align: center;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 17px;
   position: relative;
   z-index: 1;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   position: relative;
   z-index: 1;
 }
