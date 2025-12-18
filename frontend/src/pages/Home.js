@@ -4,7 +4,12 @@ import '../styles/Dashboard.css';
 import Footer from '../components/Footer';
 
 const Home = () => {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(localStorage.getItem('appTheme') === 'dark');
+
+  const handleThemeChange = (dark) => {
+    setIsDark(dark);
+    localStorage.setItem('appTheme', dark ? 'dark' : 'light');
+  };
 
   const theme = isDark ? {
     appBg: 'linear-gradient(145deg, #0c1410 0%, #0f1c15 40%, #13261c 100%)',
@@ -37,7 +42,7 @@ const Home = () => {
       {/* Toolbar Header */}
       <header style={{
         padding: '20px 48px',
-        background: theme.headerBg,
+        background: isDark ? '#1a2a1f' : '#fff',
         borderBottom: theme.headerBorder,
         display: 'flex',
         alignItems: 'center',
@@ -65,7 +70,7 @@ const Home = () => {
             <button style={{
               background: 'transparent',
               border: 'none',
-              color: theme.textPrimary,
+              color: '#4b9b6e',
               cursor: 'pointer',
               fontSize: 14,
               fontWeight: 600,
@@ -73,23 +78,29 @@ const Home = () => {
               borderRadius: 8,
               transition: 'all 0.2s',
             }}
-            onMouseEnter={(e) => e.target.style.background = isDark ? 'rgba(168,213,186,0.1)' : 'rgba(107,191,138,0.1)'}
+            onMouseEnter={(e) => e.target.style.background = 'rgba(107,191,138,0.1)'}
             onMouseLeave={(e) => e.target.style.background = 'transparent'}
             >
               About Us
             </button>
           </Link>
-          <button onClick={() => setIsDark(!isDark)} style={{
-            background: isDark ? 'rgba(168,213,186,0.08)' : 'rgba(168,213,186,0.35)',
-            border: isDark ? '1px solid rgba(168,213,186,0.24)' : '1px solid rgba(75,155,110,0.35)',
-            color: isDark ? '#f4fffa' : '#0f1a14',
-            padding: '10px 14px',
-            borderRadius: 12,
-            fontWeight: 600,
+          <button onClick={() => handleThemeChange(!isDark)} style={{
+            background: 'transparent',
+            border: `1px solid ${isDark ? 'rgba(232,242,234,0.6)' : 'rgba(15,26,20,0.7)'}`,
+            color: theme.textPrimary,
             cursor: 'pointer',
-            fontSize: 14,
-          }}>
-            {isDark ? '☀️ Light' : '🌙 Dark'}
+            fontSize: 18,
+            padding: '6px 10px',
+            borderRadius: 8,
+            transition: 'all 0.2s',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+          onMouseEnter={(e) => e.target.style.background = 'rgba(107,191,138,0.1)'}
+          onMouseLeave={(e) => e.target.style.background = 'transparent'}
+          title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          >
+            {isDark ? '☀️' : '🌙'}
           </button>
           <Link to="/login" style={{
             textDecoration: 'none',

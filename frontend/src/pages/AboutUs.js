@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Dashboard.css';
 
@@ -31,8 +31,15 @@ const themes = {
 
 const AboutUs = () => {
   const navigate = useNavigate();
-  const themeName = localStorage.getItem('patientTheme') || 'light';
-  const theme = themes[themeName] || themes.light;
+  const [isDark, setIsDark] = useState(localStorage.getItem('appTheme') === 'dark');
+  
+  const handleThemeChange = () => {
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    localStorage.setItem('appTheme', newIsDark ? 'dark' : 'light');
+  };
+  
+  const theme = isDark ? themes.dark : themes.light;
 
   return (
     <div style={{ minHeight: '100vh', background: theme.appBg, color: theme.textPrimary, fontFamily: "'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica Neue', Arial, sans-serif" }}>
@@ -48,13 +55,13 @@ const AboutUs = () => {
         position: 'sticky',
         top: 0,
         zIndex: 100,
-        background: themeName === 'dark' ? '#1a2a1f' : '#fff',
+        background: isDark ? '#1a2a1f' : '#fff',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
           <span style={{
             fontSize: 26,
             fontWeight: 800,
-            background: themeName === 'dark'
+            background: isDark
               ? 'linear-gradient(135deg, #a8d5ba 0%, #6bbf8a 50%, #4b9b6e 100%)'
               : 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)',
             WebkitBackgroundClip: 'text',
@@ -72,7 +79,7 @@ const AboutUs = () => {
             style={{
               background: 'transparent',
               border: 'none',
-              color: theme.textPrimary,
+              color: '#4b9b6e',
               cursor: 'pointer',
               fontSize: 14,
               fontWeight: 600,
@@ -100,6 +107,26 @@ const AboutUs = () => {
             }}
           >
             About Us
+          </button>
+          <button
+            onClick={() => handleThemeChange(!isDark)}
+            style={{
+              background: 'transparent',
+              border: `1px solid ${theme.textMuted}`,
+              color: theme.textPrimary,
+              cursor: 'pointer',
+              fontSize: 18,
+              padding: '6px 10px',
+              borderRadius: 8,
+              transition: 'all 0.2s',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+            onMouseEnter={(e) => e.target.style.background = 'rgba(107,191,138,0.1)'}
+            onMouseLeave={(e) => e.target.style.background = 'transparent'}
+            title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          >
+            {isDark ? '☀️' : '🌙'}
           </button>
           <button
             onClick={() => navigate('/login')}

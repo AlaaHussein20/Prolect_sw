@@ -39,11 +39,19 @@ const AppointmentHistory = () => {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('desc'); // desc = newest first
   const [specializationFilter, setSpecializationFilter] = useState('All');
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem('appTheme') === 'dark';
+  });
 
-  const themeName = localStorage.getItem('patientTheme') || 'light';
-  const theme = themes[themeName] || themes.light;
+  const theme = isDark ? themes.dark : themes.light;
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const userId = user?._id;
+
+  const handleThemeChange = () => {
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    localStorage.setItem('appTheme', newIsDark ? 'dark' : 'light');
+  };
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -119,14 +127,14 @@ const AppointmentHistory = () => {
         position: 'sticky',
         top: 0,
         zIndex: 100,
-        background: theme.appBg,
+        background: isDark ? '#1a2a1f' : '#fff',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 18, flex: 1 }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
             <span style={{
             fontSize: 26,
             fontWeight: 800,
-            background: themeName === 'dark'
+            background: isDark
               ? 'linear-gradient(135deg, #a8d5ba 0%, #6bbf8a 50%, #4b9b6e 100%)'
               : 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)',
             WebkitBackgroundClip: 'text',
@@ -140,6 +148,26 @@ const AppointmentHistory = () => {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <button 
+            onClick={handleThemeChange}
+            style={{
+              background: 'transparent',
+              border: `1px solid ${theme.textMuted}`,
+              color: theme.textPrimary,
+              cursor: 'pointer',
+              fontSize: 18,
+              padding: '6px 10px',
+              borderRadius: 8,
+              transition: 'all 0.2s',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+            onMouseEnter={(e) => e.target.style.background = 'rgba(107,191,138,0.1)'}
+            onMouseLeave={(e) => e.target.style.background = 'transparent'}
+            title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          >
+            {isDark ? '☀️' : '🌙'}
+          </button>
           <div style={{ textAlign: 'right' }}>
             <div style={{ fontWeight: 600, color: theme.textPrimary }}>
               {user?.name || 'Patient'}
@@ -150,7 +178,7 @@ const AppointmentHistory = () => {
             width: 44,
             height: 44,
             borderRadius: '50%',
-            background: themeName === 'dark'
+            background: isDark
               ? 'linear-gradient(145deg, #a8d5ba 0%, #6bbf8a 100%)'
               : 'linear-gradient(145deg, #6bbf8a 0%, #4b9b6e 100%)',
             display: 'grid',

@@ -94,12 +94,11 @@ const PatientDashboard = () => {
   const [openSlotsDoctor, setOpenSlotsDoctor] = useState(null);
   const [error, setError] = useState('');
   const [profileDoctor, setProfileDoctor] = useState(null);
-  const [themeName, setThemeName] = useState(() => {
-    const saved = localStorage.getItem('patientTheme');
-    return saved || 'light';
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem('appTheme') === 'dark';
   });
   
-  const theme = themes[themeName];
+  const theme = isDark ? themes.dark : themes.light;
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const userId = user?._id;
 
@@ -179,10 +178,10 @@ const PatientDashboard = () => {
     navigate('/login');
   };
 
-  const handleThemeToggle = () => {
-    const newTheme = themeName === 'dark' ? 'light' : 'dark';
-    setThemeName(newTheme);
-    localStorage.setItem('patientTheme', newTheme);
+  const handleThemeChange = () => {
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    localStorage.setItem('appTheme', newIsDark ? 'dark' : 'light');
   };
 
   const handleBookTime = async (doctor, slot) => {
@@ -400,19 +399,23 @@ const PatientDashboard = () => {
       {/* Header */}
       <header style={{
         padding: '16px 36px',
+        background: isDark ? '#1a2a1f' : '#fff',
+        borderBottom: theme.headerBorder,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        borderBottom: theme.headerBorder,
         flexWrap: 'wrap',
         gap: 16,
+        position: 'sticky',
+        top: 0,
+        zIndex: 100,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 18, flex: 1, minWidth: 300 }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
             <span style={{
             fontSize: 26,
             fontWeight: 800,
-            color: themeName === 'dark' ? '#a8d5ba' : '#4b9b6e',
+            color: isDark ? '#a8d5ba' : '#4b9b6e',
             cursor: 'pointer',
             transition: 'color 0.2s',
             }}>
@@ -469,21 +472,24 @@ const PatientDashboard = () => {
             {user?.name?.[0]?.toUpperCase() || 'P'}
           </div>
           <button
-            onClick={handleThemeToggle}
+            onClick={handleThemeChange}
             style={{
-              background: theme.profileBg,
-              border: theme.profileBorder,
-              color: theme.profileText,
-              padding: '10px 14px',
-              borderRadius: 12,
-              fontWeight: 600,
+              background: 'transparent',
+              border: `1px solid ${theme.textMuted}`,
+              color: theme.textPrimary,
               cursor: 'pointer',
-              fontSize: 14,
+              fontSize: 18,
+              padding: '6px 10px',
+              borderRadius: 8,
               transition: 'all 0.2s',
+              display: 'flex',
+              alignItems: 'center',
             }}
-            title={`Switch to ${themeName === 'dark' ? 'light' : 'dark'} mode`}
+            onMouseEnter={(e) => e.target.style.background = 'rgba(107,191,138,0.1)'}
+            onMouseLeave={(e) => e.target.style.background = 'transparent'}
+            title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
           >
-            {themeName === 'dark' ? '☀️ Light' : '🌙 Dark'}
+            {isDark ? '☀️' : '🌙'}
           </button>
           <button
             onClick={handleLogout}

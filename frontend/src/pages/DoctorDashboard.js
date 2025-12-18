@@ -4,6 +4,82 @@ import axios from 'axios';
 import '../styles/Dashboard.css';
 import Footer from '../components/Footer';
 
+// Theme configuration
+const themes = {
+  dark: {
+    appBg: 'linear-gradient(145deg, #0c1410 0%, #0f1c15 40%, #13261c 100%)',
+    textPrimary: '#e8f2ea',
+    textMuted: 'rgba(232,242,234,0.6)',
+    headerBorder: '1px solid rgba(46,125,92,0.2)',
+    logoGradient: 'linear-gradient(135deg, #a8d5ba 0%, #6bbf8a 50%, #4b9b6e 100%)',
+    heroBg: 'linear-gradient(135deg, rgba(168,213,186,0.16) 0%, rgba(107,191,138,0.14) 50%, rgba(75,155,110,0.14) 100%)',
+    heroBorder: '1px solid rgba(107,191,138,0.22)',
+    cardBg: 'linear-gradient(135deg, rgba(255,255,255,0.028) 0%, rgba(255,255,255,0.014) 100%)',
+    cardBorder: '1px solid rgba(107,191,138,0.18)',
+    avatarGradient: 'linear-gradient(145deg, #a8d5ba 0%, #6bbf8a 100%)',
+    badge1Bg: 'rgba(168,213,186,0.24)',
+    badge1Text: '#f4fffa',
+    badge2Bg: 'rgba(75,155,110,0.2)',
+    badge2Text: '#e7fbf1',
+    primaryGradient: 'linear-gradient(135deg, rgba(107,191,138,0.95) 0%, rgba(75,155,110,0.95) 100%)',
+    primaryBorder: '1px solid rgba(75,155,110,0.3)',
+    primaryText: '#0b1a12',
+    profileBorder: '1px solid rgba(168,213,186,0.24)',
+    profileBg: 'rgba(168,213,186,0.08)',
+    profileText: '#f4fffa',
+    slotBorder: '1px solid rgba(75,155,110,0.28)',
+    slotShadow: '0 8px 24px rgba(75,155,110,0.12)',
+    sidebarBorder: '1px solid rgba(75,155,110,0.22)',
+    sidebarBg: 'linear-gradient(135deg, rgba(168,213,186,0.12), rgba(75,155,110,0.1))',
+    sidebarCardBorder: '1px solid rgba(75,155,110,0.18)',
+    sidebarCardBg: 'rgba(107,191,138,0.06)',
+    cancelGradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+    cancelBorder: '1px solid rgba(239,68,68,0.3)',
+    cancelText: '#fff',
+    modalOverlay: 'rgba(12,20,16,0.7)',
+    modalBg: '#0f1d17',
+    modalBorder: '1px solid rgba(46,125,92,0.35)',
+    inputBorder: '1px solid rgba(255,255,255,0.12)',
+    inputBg: 'rgba(255,255,255,0.06)',
+  },
+  light: {
+    appBg: 'linear-gradient(145deg, #f4fff7 0%, #eef9f2 40%, #e4f2e9 100%)',
+    textPrimary: '#0f1a14',
+    textMuted: 'rgba(15,26,20,0.7)',
+    headerBorder: '1px solid rgba(75,155,110,0.15)',
+    logoGradient: 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 50%, #2e7d5c 100%)',
+    heroBg: 'linear-gradient(135deg, rgba(107,191,138,0.16) 0%, rgba(75,155,110,0.14) 50%, rgba(46,125,92,0.14) 100%)',
+    heroBorder: '1px solid rgba(75,155,110,0.22)',
+    cardBg: 'rgba(255,255,255,0.92)',
+    cardBorder: '1px solid rgba(107,191,138,0.2)',
+    avatarGradient: 'linear-gradient(145deg, #6bbf8a 0%, #4b9b6e 100%)',
+    badge1Bg: 'rgba(107,191,138,0.24)',
+    badge1Text: '#0b4f32',
+    badge2Bg: 'rgba(75,155,110,0.2)',
+    badge2Text: '#0d2818',
+    primaryGradient: 'linear-gradient(135deg, #6bbf8a 0%, #4b9b6e 100%)',
+    primaryBorder: '1px solid rgba(75,155,110,0.3)',
+    primaryText: '#fff',
+    profileBorder: '1px solid rgba(107,191,138,0.24)',
+    profileBg: 'rgba(107,191,138,0.08)',
+    profileText: '#0b1a12',
+    slotBorder: '1px solid rgba(107,191,138,0.28)',
+    slotShadow: '0 8px 24px rgba(107,191,138,0.12)',
+    sidebarBorder: '1px solid rgba(107,191,138,0.22)',
+    sidebarBg: 'linear-gradient(135deg, rgba(107,191,138,0.12), rgba(75,155,110,0.1))',
+    sidebarCardBorder: '1px solid rgba(107,191,138,0.18)',
+    sidebarCardBg: 'rgba(107,191,138,0.08)',
+    cancelGradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+    cancelBorder: '1px solid rgba(239,68,68,0.3)',
+    cancelText: '#fff',
+    modalOverlay: 'rgba(240,245,242,0.9)',
+    modalBg: '#f8fff9',
+    modalBorder: '1px solid rgba(107,191,138,0.35)',
+    inputBorder: '1px solid rgba(107,191,138,0.2)',
+    inputBg: '#f8fff9',
+  },
+};
+
 const DoctorDashboard = () => {
   const [user] = useState(() => JSON.parse(localStorage.getItem('user')));
   const [doctorProfile, setDoctorProfile] = useState(null);
@@ -18,10 +94,11 @@ const DoctorDashboard = () => {
   const [availableSlots, setAvailableSlots] = useState([]);
   const [slotDate, setSlotDate] = useState('');
   const [slotTime, setSlotTime] = useState('');
-  const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem('doctorDarkMode');
-    return saved ? JSON.parse(saved) : false;
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem('appTheme') === 'dark';
   });
+
+  const theme = isDark ? themes.dark : themes.light;
   const navigate = useNavigate();
 
   const fetchDoctorData = useCallback(async () => {
@@ -54,36 +131,10 @@ const DoctorDashboard = () => {
     fetchDoctorData();
   }, [fetchDoctorData]);
 
-  useEffect(() => {
-    // Apply dark mode to body and html on mount
-    if (darkMode) {
-      document.body.classList.add('dark-mode');
-      document.documentElement.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-      document.documentElement.classList.remove('dark-mode');
-    }
-    
-    // Cleanup on unmount
-    return () => {
-      document.body.classList.remove('dark-mode');
-      document.documentElement.classList.remove('dark-mode');
-    };
-  }, [darkMode]);
-
-  const handleToggleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode);
-    localStorage.setItem('doctorDarkMode', JSON.stringify(newDarkMode));
-    
-    // Apply dark mode to body and html
-    if (newDarkMode) {
-      document.body.classList.add('dark-mode');
-      document.documentElement.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-      document.documentElement.classList.remove('dark-mode');
-    }
+  const handleThemeChange = () => {
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    localStorage.setItem('appTheme', newIsDark ? 'dark' : 'light');
   };
 
   const handleLogout = () => {
@@ -228,12 +279,12 @@ const DoctorDashboard = () => {
   const pastAppointments = getPastAppointments();
 
   return (
-    <div className={`dashboard-container ${darkMode ? 'dark-mode' : ''}`}>
+    <div style={{ background: theme.appBg, color: theme.textPrimary, minHeight: '100vh' }}>
       {/* Toolbar */}
       <header style={{
         padding: '16px 36px',
-        background: darkMode ? '#232b3e' : '#fff',
-        borderBottom: darkMode ? '1px solid rgba(107, 191, 138, 0.2)' : '1px solid rgba(107, 191, 138, 0.2)',
+        background: isDark ? '#1a2a1f' : '#fff',
+        borderBottom: theme.headerBorder,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -248,7 +299,7 @@ const DoctorDashboard = () => {
             <span style={{
             fontSize: 26,
             fontWeight: 800,
-            color: darkMode ? '#a8d5ba' : '#4b9b6e',
+            color: isDark ? '#a8d5ba' : '#4b9b6e',
             cursor: 'pointer',
             transition: 'color 0.2s',
             }}>
@@ -259,10 +310,10 @@ const DoctorDashboard = () => {
         
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontWeight: 600, color: darkMode ? '#e8f2ea' : '#0f1a14' }}>
+            <div style={{ fontWeight: 600, color: theme.textPrimary }}>
               Dr. {user?.name || 'Doctor'}
             </div>
-            <div style={{ fontSize: 12, color: darkMode ? 'rgba(232,242,234,0.6)' : 'rgba(15,26,20,0.7)' }}>
+            <div style={{ fontSize: 12, color: theme.textMuted }}>
               Doctor
             </div>
           </div>
@@ -270,33 +321,34 @@ const DoctorDashboard = () => {
             width: 44,
             height: 44,
             borderRadius: '50%',
-            background: darkMode 
-              ? 'linear-gradient(145deg, #a8d5ba 0%, #6bbf8a 100%)'
-              : 'linear-gradient(145deg, #6bbf8a 0%, #4b9b6e 100%)',
+            background: theme.avatarGradient,
             display: 'grid',
             placeItems: 'center',
             fontWeight: 700,
             fontSize: 18,
-            color: '#0b1a12',
+            color: theme.primaryText,
           }}>
             {user?.name?.[0]?.toUpperCase() || 'D'}
           </div>
           <button
-            onClick={handleToggleDarkMode}
+            onClick={handleThemeChange}
             style={{
-              background: darkMode ? 'rgba(168,213,186,0.08)' : 'rgba(168,213,186,0.35)',
-              border: darkMode ? '1px solid rgba(168,213,186,0.24)' : '1px solid rgba(75,155,110,0.35)',
-              color: darkMode ? '#f4fffa' : '#0f1a14',
-              padding: '10px 14px',
-              borderRadius: 12,
-              fontWeight: 600,
+              background: 'transparent',
+              border: `1px solid ${theme.textMuted}`,
+              color: theme.textPrimary,
               cursor: 'pointer',
-              fontSize: 14,
+              fontSize: 18,
+              padding: '6px 10px',
+              borderRadius: 8,
               transition: 'all 0.2s',
+              display: 'flex',
+              alignItems: 'center',
             }}
-            title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            onMouseEnter={(e) => e.target.style.background = 'rgba(107,191,138,0.1)'}
+            onMouseLeave={(e) => e.target.style.background = 'transparent'}
+            title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
           >
-            {darkMode ? '☀️ Light' : '🌙 Dark'}
+            {isDark ? '☀️' : '🌙'}
           </button>
           <button
             onClick={handleLogout}
@@ -558,12 +610,7 @@ const DoctorDashboard = () => {
         </div>
       </div>
 
-      <Footer theme={{
-        appBg: darkMode ? 'linear-gradient(145deg, #0c1410 0%, #0f1c15 40%, #13261c 100%)' : 'linear-gradient(145deg, #f4fff7 0%, #eef9f2 40%, #e4f2e9 100%)',
-        textPrimary: darkMode ? '#e8f2ea' : '#0f1a14',
-        textMuted: darkMode ? 'rgba(232,242,234,0.6)' : 'rgba(15,26,20,0.7)',
-        headerBorder: darkMode ? '1px solid rgba(46,125,92,0.2)' : '1px solid rgba(75,155,110,0.15)',
-      }} />
+      <Footer theme={theme} />
     </div>
   );
 };
