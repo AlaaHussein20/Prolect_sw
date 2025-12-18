@@ -117,17 +117,6 @@ const Home = () => {
             </p>
 
             <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
-              <input placeholder="Search doctors or specializations..." style={{
-                width: 380,
-                maxWidth: '100%',
-                padding: '12px 16px',
-                borderRadius: 10,
-                border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : 'rgba(75,155,110,0.15)'}`,
-                background: isDark ? 'rgba(255,255,255,0.06)' : '#f8fff9',
-                color: theme.textPrimary,
-                outline: 'none',
-                fontSize: 14,
-              }} />
               <Link to="/register" style={{
                 textDecoration: 'none',
                 background: theme.primaryGradient,
