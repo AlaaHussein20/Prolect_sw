@@ -35,7 +35,7 @@ const Login = () => {
     password: '',
   });
   const [error, setError] = useState('');
-  const [isDark, setIsDark] = useState(localStorage.getItem('loginTheme') === 'dark');
+  const [isDark, setIsDark] = useState(localStorage.getItem('appTheme') === 'dark');
   const theme = isDark ? themes.dark : themes.light;
   const navigate = useNavigate();
 
@@ -71,7 +71,7 @@ const Login = () => {
 
   const handleThemeToggle = () => {
     setIsDark(!isDark);
-    localStorage.setItem('loginTheme', !isDark ? 'dark' : 'light');
+    localStorage.setItem('appTheme', !isDark ? 'dark' : 'light');
   };
 
   return (

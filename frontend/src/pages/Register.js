@@ -41,7 +41,7 @@ function Register() {
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [isDark, setIsDark] = useState(localStorage.getItem('registerTheme') === 'dark');
+  const [isDark, setIsDark] = useState(localStorage.getItem('appTheme') === 'dark');
   const theme = isDark ? themes.dark : themes.light;
 
   const handleChange = (e) => {
@@ -105,7 +105,7 @@ function Register() {
 
   const handleThemeToggle = () => {
     setIsDark(!isDark);
-    localStorage.setItem('registerTheme', !isDark ? 'dark' : 'light');
+    localStorage.setItem('appTheme', !isDark ? 'dark' : 'light');
   };
 
   return (
