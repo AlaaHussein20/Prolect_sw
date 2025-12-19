@@ -14,7 +14,7 @@ This document provides a comprehensive weekly breakdown of Scrum activities for 
 - Total Issues:  22 (17 Closed, 5 Open)
 - Total Pull Requests: 13 (10 Merged)
 - Completion Rate: 77%
-- Active Contributors: 5
+- Active Contributors: 4
 - Total Commits: 100+
 
 ---
