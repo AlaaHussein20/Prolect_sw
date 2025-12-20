@@ -1,6 +1,7 @@
 # Prolect_sw
 
-![CI Status](https://github.com/YOUR_USERNAME/YOUR_REPO/workflows/CI/badge.svg)
+## 🚀 Live Demo
+**Production URL:** [https://vezeeto.netlify.app/](https://vezeeto.netlify.app/)
 
 ## Project Summary
 Prolect_sw is a full-stack application that helps manage medical appointments, users, and doctor/patient interactions. It provides simple workflows for scheduling and tracking appointments and exposes separate backend APIs and a React-based frontend for the user interfaces.
