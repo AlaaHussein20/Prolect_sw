@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 
 app.use(cors());
 
@@ -12,7 +12,7 @@ const userRoutes = require('./routes/userRoutes');
 app.use('/api/users', userRoutes);
 
 // ✅ connect to MongoDB Atlas (use env var if available)
-const mongoUri = process.env.MONGO_URI || 'mongodb+srv://alaahussein20_db_user:csci313project@project.sz8j3z2.mongodb.net/';
+const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://alaahussein20_db_user:csci313project@project.sz8j3z2.mongodb.net/';
 mongoose.connect(mongoUri)
 .then(() => console.log('✅ Connected to MongoDB Atlas'))
 .catch((err) => {
@@ -36,5 +36,5 @@ app.use('/api/appointments', appointmentRoutes);
 
 // start server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
