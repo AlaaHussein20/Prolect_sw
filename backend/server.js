@@ -10,12 +10,15 @@ const corsOptions = {
     const allowedOrigins = [
       'http://localhost:3000',      // Local development
       'http://localhost:5001',      // Local backend
-      process.env.FRONTEND_URL,     // Production Netlify URL
+      'https://vezeeto.netlify.app', // Your Netlify URL (add this explicitly!)
+      process.env.FRONTEND_URL,     // Production Netlify URL from env
     ].filter(Boolean); // Remove undefined values
     
+    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.log('❌ CORS blocked origin:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
@@ -54,6 +57,7 @@ app.use('/api/doctors', doctorRoutes);
 const appointmentRoutes = require('./routes/appointmentRoutes');
 app.use('/api/appointments', appointmentRoutes);
 
+  console.log('Allowed CORS origins:', corsOptions.origin);
 // start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
