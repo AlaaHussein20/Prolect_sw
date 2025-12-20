@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../config/api';
 import '../styles/Dashboard.css';
 import Footer from '../components/Footer';
 
@@ -108,7 +109,7 @@ const DoctorDashboard = () => {
       
       // Fetch doctor profile by userId
       const profileResponse = await axios.get(
-        `http://localhost:5001/api/doctors/user/${user.id}`
+        `${API_URL}/api/doctors/user/${user.id}`
       );
       setDoctorProfile(profileResponse.data);
       setEditedProfile(profileResponse.data);
@@ -116,7 +117,7 @@ const DoctorDashboard = () => {
 
       // Fetch appointments for this doctor
       const appointmentsResponse = await axios.get(
-        `http://localhost:5001/api/appointments/doctor/${profileResponse.data._id}`
+        `${API_URL}/api/appointments/doctor/${profileResponse.data._id}`
       );
       setAppointments(appointmentsResponse.data);
     } catch (err) {
@@ -217,7 +218,7 @@ const DoctorDashboard = () => {
     try {
       setErrorMessage('');
       const response = await axios.put(
-        `http://localhost:5001/api/doctors/${doctorProfile._id}`,
+        `${API_URL}/api/doctors/${doctorProfile._id}`,
         editedProfile
       );
       setDoctorProfile(response.data.doctor);

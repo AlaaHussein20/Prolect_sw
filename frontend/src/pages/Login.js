@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../config/api';
 import '../styles/Login.css';
 import Footer from '../components/Footer';
 
@@ -51,7 +52,7 @@ const Login = () => {
     setError('');
     
     try {
-      const response = await axios.post('http://localhost:5001/api/users/login', formData);
+      const response = await axios.post(`${API_URL}/api/users/login`, formData);
       const { token, user } = response.data;
       
       // Store the token and user data in localStorage

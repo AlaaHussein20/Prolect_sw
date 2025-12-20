@@ -4,7 +4,27 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.use(cors());
+// ✅ Configure CORS for frontend (localhost + Netlify production)
+const corsOptions = {
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      'http://localhost:3000',      // Local development
+      'http://localhost:5001',      // Local backend
+      process.env.FRONTEND_URL,     // Production Netlify URL
+    ].filter(Boolean); // Remove undefined values
+    
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
 
 // middleware
 app.use(express.json());

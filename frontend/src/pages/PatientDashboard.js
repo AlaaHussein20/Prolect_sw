@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../config/api';
 import '../styles/Dashboard.css';
 import Footer from '../components/Footer';
 
@@ -200,7 +201,7 @@ const PatientDashboard = () => {
         status: 'scheduled',
       };
 
-      const res = await axios.post('http://localhost:5001/api/appointments/book', payload);
+      const res = await axios.post(`${API_URL}/api/appointments/book`, payload);
       const savedAppointment = res.data.appointment || payload;
       const appointmentWithDoctor = { 
         ...savedAppointment, 
@@ -236,7 +237,7 @@ const PatientDashboard = () => {
       const appointmentId = appointment._id;
       const doctorId = appointment.doctor?._id || appointment.doctor;
       
-      await axios.patch(`http://localhost:5001/api/appointments/${appointmentId}/cancel`);
+      await axios.patch(`${API_URL}/api/appointments/${appointmentId}/cancel`);
 
       setAppointments((prev) => prev.filter((apt) => apt._id !== appointmentId));
       
@@ -281,8 +282,8 @@ const PatientDashboard = () => {
         setError('');
         
         const [doctorsRes, appointmentsRes] = await Promise.all([
-          axios.get('http://localhost:5001/api/doctors'),
-          axios.get('http://localhost:5001/api/appointments'),
+          axios.get(`${API_URL}/api/doctors`),
+          axios.get(`${API_URL}/api/appointments`),
         ]);
 
         const doctorsList = doctorsRes.data || [];

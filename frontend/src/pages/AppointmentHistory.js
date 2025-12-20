@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../config/api';
 import '../styles/Dashboard.css';
 import Footer from '../components/Footer';
 
@@ -62,7 +63,7 @@ const AppointmentHistory = () => {
 
       try {
         setLoading(true);
-        const res = await axios.get('http://localhost:5001/api/appointments');
+        const res = await axios.get(`${API_URL}/api/appointments`);
         const all = res.data || [];
 
         const now = new Date();

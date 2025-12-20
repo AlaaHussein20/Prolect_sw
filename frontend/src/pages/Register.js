@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import API_URL from '../config/api';
 import '../styles/Register.css';
 import Footer from '../components/Footer';
 
@@ -76,7 +77,7 @@ function Register() {
         registerPayload.specialization = formData.specialization;
         registerPayload.fees = formData.fees;
       }
-      const res = await fetch('http://localhost:5001/api/users/register', {
+      const res = await fetch(`${API_URL}/api/users/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(registerPayload),
